@@ -15,13 +15,14 @@ export class Services1708979595312 implements MigrationInterface {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "title",
+                        name: "name",
                         type: "varchar",
-                        length: "255",
+                        length: "100",
                     },
                     {
-                        name: "director",
-                        type: "int",
+                        name: "description",
+                        type: "varchar",
+                        length: "500",
                     },
                 ],
             }),

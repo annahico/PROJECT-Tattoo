@@ -15,15 +15,32 @@ export class Appointments1708979680826 implements MigrationInterface {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "title",
-                        type: "varchar",
-                        length: "255",
+                        name: "appointment_date",
+                        type: "timestamp",
                     },
                     {
-                        name: "director",
+                        name: "user_id",
+                        type: "int",
+                    },
+                    {
+                        name: "service_id",
                         type: "int",
                     },
                 ],
+                foreignKeys: [
+                    {
+                    columnNames: ["user_id"],
+                    referencedTableName: "users",
+                    referencedColumnNames: ["id"],
+                    onDelete: "CASCADE"
+                    },
+                    {
+                    columnNames: ["service_id"],
+                    referencedTableName: "services",
+                    referencedColumnNames: ["id"],
+                    onDelete: "CASCADE"
+                    }
+                ]
             }),
             true
         );

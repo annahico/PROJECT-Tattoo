@@ -15,13 +15,9 @@ export class Roles1708979493107 implements MigrationInterface {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "title",
+                        name: "name",
                         type: "varchar",
                         length: "255",
-                    },
-                    {
-                        name: "director",
-                        type: "int",
                     },
                 ],
             }),
