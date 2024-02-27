@@ -7,6 +7,10 @@ import { Services1708979595312 } from "./migrations/1708979595312-services"
 import { Roles1708979493107 } from "./migrations/1708979493107-roles"
 import { Users1708974801136 } from "./migrations/1708974801136-users"
 import { Appointments1708979680826 } from "./migrations/1708979680826-appointments"
+import { Role } from "../models/Role"
+import { User } from "../models/User"
+import { Service } from "../models/Service"
+import { Appointment } from "../models/Appointment"
 
 
 export const AppDataSource = new DataSource({
@@ -16,7 +20,12 @@ export const AppDataSource = new DataSource({
     username: process.env.DB_USER || "root",
     password: process.env.DB_ROOT_PASSWORD || "",
     database: process.env.DB_DATABASE || "test",
-    entities: [],
+    entities: [
+        Role,
+        User,
+        Service,
+        Appointment
+    ],
     migrations: [
         Roles1708979493107,
         Services1708979595312,
