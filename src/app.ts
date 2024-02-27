@@ -1,4 +1,5 @@
 import express, {Application} from "express";
+import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleControllers";
 
 export const app: Application = express();
 
@@ -10,3 +11,11 @@ app.get("/healthy", (req, res) => {
         message: "server is healthy"
     })
 })
+
+app.get('/roles', getRoles)
+
+app.post('/roles', createRoles)
+
+app.put('/roles/:id', updateRoles)
+
+app.delete('/roles/:id', deleteRoles)
