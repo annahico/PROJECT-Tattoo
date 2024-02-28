@@ -33,6 +33,21 @@ export const createServices = async (req: Request, res: Response) => {
 // delete services
 export const deleteServices = async (req:Request, res: Response) => {
     try {
+        const serviceId = req.params.id
+
+        const serviceToRemove = await Service.findOneBy({
+            id: parseInt(serviceId)
+        })
+        if(!serviceToRemove) {
+            return res.status(404).json(
+            {
+                success: true,
+                message: "service cant be deleted"
+            })
+        }
+
+        await Service.remove(serviceToRemove);
+        
         res.status(200).json(
             {
                 success: true,
