@@ -3,14 +3,19 @@ import "reflect-metadata"
 import "dotenv/config"
 
 import { DataSource } from "typeorm"
-import { Services1708979595312 } from "./migrations/1708979595312-services"
+
 import { Roles1708979493107 } from "./migrations/1708979493107-roles"
 import { Users1708974801136 } from "./migrations/1708974801136-users"
+import { Services1708979595312 } from "./migrations/1708979595312-services"
 import { Appointments1708979680826 } from "./migrations/1708979680826-appointments"
+
 import { Role } from "../models/Role"
 import { User } from "../models/User"
 import { Service } from "../models/Service"
 import { Appointment } from "../models/Appointment"
+
+
+
 
 
 export const AppDataSource = new DataSource({
@@ -28,8 +33,8 @@ export const AppDataSource = new DataSource({
     ],
     migrations: [
         Roles1708979493107,
-        Services1708979595312,
         Users1708974801136,
+        Services1708979595312,
         Appointments1708979680826
     ],
     synchronize: false,

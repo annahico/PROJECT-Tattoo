@@ -21,8 +21,8 @@ export class Services1708979595312 implements MigrationInterface {
                     },
                     {
                         name: "description",
-                        type: "varchar",
-                        length: "500",
+                        type: "text",
+                        length: "1000",
                     },
                 ],
             }),
