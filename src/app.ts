@@ -1,6 +1,6 @@
 import express, {Application} from "express";
 //import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleControllers";
-import { createServices, deleteServices, getServices, getServicesById, updateServices } from "./controllers/serviceControllers";
+import { createServices, deleteServices, getServices, getServicesById } from "./controllers/serviceControllers";
 import { register } from "./controllers/authController";
 
 export const app: Application = express();
@@ -24,4 +24,4 @@ app.get('/api/services', getServices);
 
 app.get('/api/services/:id', getServicesById)
 
-app.put('/api/services/:id', updateServices)
+// app.put('/api/services/:id', updateServices)

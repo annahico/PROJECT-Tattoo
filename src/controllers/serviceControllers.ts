@@ -126,47 +126,47 @@ export const getServicesById = async (req: Request, res: Response) => {
 
 //update services
 
-export const updateServices = async (req: Request, res: Response) => {
-    try {
-        const serviceId = req.params.id;
-        const name = req.params.name;
-        const description = req.params.description;
+// export const updateServices = async (req: Request, res: Response) => {
+//     try {
+//         const serviceId = req.params.id;
+//         const name = req.params.name;
+//         const description = req.params.description;
 
-        const service = await Service.findOneBy({
-            id: parseInt(serviceId)
-        })
-        if(!service) {
-            return res.status(404).json(
-                {
-                    success: true,
-                    message: "seervice not found"
-                })
-        }
+//         const service = await Service.findOneBy({
+//             id: parseInt(serviceId)
+//         })
+//         if(!service) {
+//             return res.status(404).json(
+//                 {
+//                     success: true,
+//                     message: "seervice not found"
+//                 })
+//         }
 
-        const serviceUpdated = await Service.update (
-            {
-                id: parseInt(serviceId)
-            },
-            {
-                name: name,
-                description: description
-            }
-        )
+//         const serviceUpdated = await Service.update (
+//             {
+//                 id: parseInt(serviceId)
+//             },
+//             {
+//                 name: name,
+//                 description: description
+//             }
+//         )
 
-        res.status(200).json(
-            {
-                success: true,
-                message: "service updated successfully",
-                data: serviceUpdated
-            })
-    } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: "service cant be updated",
-                error: error
-            })
+//         res.status(200).json(
+//             {
+//                 success: true,
+//                 message: "service updated successfully",
+//                 data: serviceUpdated
+//             })
+//     } catch (error) {
+//         res.status(500).json(
+//             {
+//                 success: false,
+//                 message: "service cant be updated",
+//                 error: error
+//             })
         
-    }
-}
+//     }
+// }
 
