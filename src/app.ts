@@ -1,6 +1,6 @@
 import express, {Application} from "express";
 import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleControllers";
-import { createServices } from "./controllers/serviceControllers";
+import { createServices, deleteServices } from "./controllers/serviceControllers";
 
 export const app: Application = express();
 
@@ -22,3 +22,5 @@ app.put('/roles/:id', updateRoles)
 app.delete('/roles/:id', deleteRoles)
 
 app.post('/api/services', createServices)
+
+app.delete('/api/services/:id', deleteServices)
