@@ -1,6 +1,7 @@
 import express, {Application} from "express";
-import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleControllers";
-import { createServices, deleteServices } from "./controllers/serviceControllers";
+//import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleControllers";
+import { createServices, deleteServices, getServices, getServicesById, updateServices } from "./controllers/serviceControllers";
+import { register } from "./controllers/authController";
 
 export const app: Application = express();
 
@@ -13,14 +14,14 @@ app.get("/healthy", (req, res) => {
     })
 })
 
-app.get('/roles', getRoles)
+app.post('/api/register', register);
 
-app.post('/roles', createRoles)
+app.post('/api/services', createServices);
 
-app.put('/roles/:id', updateRoles)
+app.delete('/api/services/:id', deleteServices);
 
-app.delete('/roles/:id', deleteRoles)
+app.get('/api/services', getServices);
 
-app.post('/api/services', createServices)
+app.get('/api/services/:id', getServicesById)
 
-app.delete('/api/services/:id', deleteServices)
+app.put('/api/services/:id', updateServices)
