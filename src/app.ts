@@ -5,7 +5,7 @@ import express, {Application} from "express";
 import { login, register } from "./controllers/authController";
 import { createServices, deleteServices, getServices, getServicesById, updateServices } from "./controllers/serviceControllers";
 import { auth } from "./middlewares/auth";
-import { getUsers } from "./controllers/userControllers";
+import { deleteUsers, getUsers } from "./controllers/userControllers";
 import { superAdmin } from "./middlewares/superAdmin";
 
 
@@ -40,3 +40,5 @@ app.get('/api/services/:id', getServicesById)
 
 
 app.get('/api/users', auth,superAdmin, getUsers)
+
+app.delete('/api/users/:id',auth, superAdmin, deleteUsers)
