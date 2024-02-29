@@ -1,7 +1,14 @@
 import express, {Application} from "express";
 //import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleControllers";
-import { createServices, deleteServices, getServices, getServicesById, updateServices } from "./controllers/serviceControllers";
+
+
 import { login, register } from "./controllers/authController";
+import { createServices, deleteServices, getServices, getServicesById, updateServices } from "./controllers/serviceControllers";
+import { auth } from "./middlewares/auth";
+import { getUsers } from "./controllers/userControllers";
+import { superAdmin } from "./middlewares/superAdmin";
+
+
 
 export const app: Application = express();
 
@@ -19,13 +26,17 @@ app.post('/api/auth/register', register);
 app.post('/api/auth/login', login);
 
 
-
-app.post('/api/services', createServices);
-
-app.delete('/api/services/:id', deleteServices);
-
 app.get('/api/services', getServices);
+
+app.post('/api/services',auth, superAdmin, createServices);
+
+app.put('/api/services/:id',auth, superAdmin, updateServices)
+
+app.delete('/api/services/:id',auth, superAdmin, deleteServices);
 
 app.get('/api/services/:id', getServicesById)
 
-app.put('/api/services/:id', updateServices)
+
+
+
+app.get('/api/users', auth,superAdmin, getUsers)
