@@ -5,7 +5,7 @@ import express, {Application} from "express";
 import { login, register } from "./controllers/authController";
 import { createServices, deleteServices, getServices, getServicesById, updateServices } from "./controllers/serviceControllers";
 import { auth } from "./middlewares/auth";
-import { deleteUsers, getUsers } from "./controllers/userControllers";
+import { deleteUsers, getUsers, updateProfile } from "./controllers/userControllers";
 import { superAdmin } from "./middlewares/superAdmin";
 
 
@@ -21,11 +21,24 @@ app.get("/healthy", (req, res) => {
     })
 })
 
+// auth routes
 app.post('/api/auth/register', register);
 
 app.post('/api/auth/login', login);
 
 
+// users routes
+app.get('/api/users', auth,superAdmin, getUsers)
+
+app.delete('/api/users/:id',auth, superAdmin, deleteUsers)
+
+app.put('/api/users/profile', updateProfile)
+
+
+//appointments routes
+
+
+//services routes
 app.get('/api/services', getServices);
 
 app.post('/api/services',auth, superAdmin, createServices);
@@ -35,10 +48,3 @@ app.put('/api/services/:id',auth, superAdmin, updateServices)
 app.delete('/api/services/:id',auth, superAdmin, deleteServices);
 
 app.get('/api/services/:id', getServicesById)
-
-
-
-
-app.get('/api/users', auth,superAdmin, getUsers)
-
-app.delete('/api/users/:id',auth, superAdmin, deleteUsers)

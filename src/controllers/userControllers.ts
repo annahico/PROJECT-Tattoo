@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
 
+
+//view users
 export const getUsers = async(req: Request, res: Response) => {
     try {
         const users = await User.find(
@@ -29,11 +31,30 @@ export const getUsers = async(req: Request, res: Response) => {
                 success: false,
                 message: "users cant be retrieved"
             })
-
     }
 }
 
 
+//update user
+export const updateProfile = async(req:Request, res:Response) => {
+    try {
+        res.status(200).json (
+            {
+                success: true,
+                message: "users update successfully",
+            }
+        )
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "users cant be updated"
+            })
+    }
+}
+
+
+//delete user
 export const deleteUsers = async (req:Request, res: Response) => {
     try {
         const userId = req.params.id

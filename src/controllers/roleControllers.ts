@@ -9,7 +9,7 @@ export const getRoles = (req: Request, res: Response) => {
         })
 }
 
-//crear rol
+//create role
 export const createRoles = async (req: Request, res: Response) => { 
     const name = req.body.name; 
     console.log(req.body)
@@ -33,6 +33,7 @@ export const createRoles = async (req: Request, res: Response) => {
 }
 
 
+//modified role
 export const updateRoles = (req: Request, res: Response) => {
 
 
@@ -46,7 +47,7 @@ export const updateRoles = (req: Request, res: Response) => {
         })
 }
 
-//borrar rol
+//delete role
 export const deleteRoles = (req: Request, res: Response) => {
 
     req.params.id;
