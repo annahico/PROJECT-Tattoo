@@ -30,7 +30,7 @@ app.post('/api/auth/login', login);
 // users routes
 app.get('/api/users', auth,superAdmin, getUsers)
 
-app.get('/api/users/profile', getUserProfile)
+app.get('/api/users/profile',auth, getUserProfile)
 
 app.delete('/api/users/:id',auth, superAdmin, deleteUsers)
 

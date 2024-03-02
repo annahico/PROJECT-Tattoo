@@ -5,6 +5,7 @@ import { User } from "../models/User";
 //view users
 export const getUsers = async(req: Request, res: Response) => {
     try {
+
         const users = await User.find(
             {
                 select: {
@@ -38,24 +39,32 @@ export const getUsers = async(req: Request, res: Response) => {
 //view user profile
 export const getUserProfile = async(req: Request, res: Response) => {
     try {
-        // const users = await User.find(
-        //     {
-        //         select: {
-        //             id: true,
-        //             firstName: true,
-        //             secondName: true,
-        //             email: true,
-        //             password: true,
-        //             createdAt: true,
-        //             updatedAt: true
-        //         }
-        //     }
-        // )
+
+        const userId = req.tokenData.userId
+        const user = await User.findOne(
+            {
+                where: {
+                    id: userId
+                },
+                relations : {
+                    role: true
+                },
+                select: {
+                    id: true,
+                    firstName: true,
+                    secondName: true,
+                    email: true,
+                    password: true,
+                    createdAt: true,
+                    updatedAt: true
+                }
+            }
+        )
         res.status(200).json (
             {
                 success: true,
                 message: "user retrieved successfully",
-                // data: users
+                data: user
             }
         )
     } catch (error) {
