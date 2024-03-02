@@ -133,7 +133,7 @@ export const deleteUsers = async (req:Request, res: Response) => {
         if(!serviceToRemove) {
             return res.status(404).json(
             {
-                success: true,
+                success: false,
                 message: "service cant be deleted"
             })
         }
