@@ -20,7 +20,6 @@ export const register = async (req: Request, res: Response) => {
             })
         }
 
-        // validacion de email
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!validEmail.test(email)) {
             return res.status(400).json(

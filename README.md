@@ -1,4 +1,4 @@
-<h1 align="center"> PROJECT BACKEND: TATTO STUDIO </h1>
+<h1 align="center"> PROJECT BACKEND: TATTOO STUDIO </h1>
 
 <image src="./img/tattoo studio.png" alt="Tattoo Studio">
 

@@ -6,10 +6,15 @@ import { Appointment } from "../models/Appointment";
 export const createAppointment = async (req: Request, res: Response) => {
     try {
         console.log(req.body);
-        const date = req.body.date;
+        const appointmentDate = req.body.appointmentDate;
+        const user = req.body.user;
+        const service = req.body.service;
 
         const newAppointment = await Appointment.create({
-            appointmentDate: date
+            appointmentDate: appointmentDate,
+            user: user,
+            service: service,
+            
         }).save()
         
         res.status(200).json(
