@@ -5,7 +5,6 @@ import { Appointment } from "../models/Appointment";
 // create appointment
 export const createAppointment = async (req: Request, res: Response) => {
     try {
-        console.log(req.body);
         const appointmentDate = req.body.appointmentDate;
         const user = req.body.user;
         const service = req.body.service;
@@ -46,16 +45,18 @@ export const createAppointment = async (req: Request, res: Response) => {
 //update appointment
 export const updateAppointment = async (req: Request, res: Response) => {
     try {
-        const user = req.body.user
-        const appointmentDate = req.body.appointmentDate;
-        const service = req.body.service;
 
-        const appointment = await Appointment.findOne({
+        const appointmentId = req.params.id
+        const service = req.body.service;
+        const appointmentDate = req.body.appointmentDate;
+        const user = req.body.user;
+
+        const changeAppointment = await Appointment.findOne({
             where: {
-            user: user
-            }
+            id: parseInt(appointmentId)
+            },
         })
-        if(!appointment) {
+        if(!changeAppointment) {
             return res.status(404).json(
                 {
                     success: false,
@@ -65,11 +66,12 @@ export const updateAppointment = async (req: Request, res: Response) => {
 
         const appointmentUpdated = await Appointment.update (
             {
-                user: user
+                id: parseInt(appointmentId)
             },
             {
             appointmentDate: appointmentDate,
-            service: service
+            service: service,
+            user: user
             }
         )
 
@@ -91,50 +93,73 @@ export const updateAppointment = async (req: Request, res: Response) => {
 }
 
 //get appointment
-// export const getAppointment = async (req: Request, res: Response) => {
-//     try {
+export const getAppointment = async (req: Request, res: Response) => {
+    try {
+        const userId = req.tokenData.userId
+        const viewAppointments = await Appointment.find({
 
-//         const appointments = await Appointment.findOne({
-//             where: 
-//             {
-//                 user: parseInt(userId)
-//             }
-//             select: {
-//                 //appointmentDate: true,
-//                 user: true,
-//                 service: true
-//             }
-//         })
+            where: 
+            {
+                user: 
+                {
+                    id: userId
+                }
+            },
+            relations: {
+                user: true,
+                service: true
+            },
+            select:
+            {
+                service:
+                {
+                    name: true
+                },
+                appointmentDate: true,
+                user: {
+                    firstName: true,
+                    secondName: true,
+                    email: true
+                }
+            }
+        })
+
+        if(viewAppointments.length === 0) {
+            return res.status(404).json(
+            {
+                success: false,
+                message: "No appointments for the user"
+            })
+        }
+
+        res.status(200).json(
+            {
+                success: true,
+                message: "service retrieved successfully",
+                data: viewAppointments
+            })
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "service cant be retrieved",
+                error: error
+            })
         
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: "service retrieved successfully",
-//                 data: appointments
-//             })
-//     } catch (error) {
-//         res.status(500).json(
-//             {
-//                 success: false,
-//                 message: "service cant be retrieved",
-//                 error: error
-//             })
-        
-//     }
-// }
+    }
+}
 
 //get appointmentsById
 export const getAppointmentById = async (req: Request, res: Response) => {
     try {
         const appointmentId = req.params.id
-        const appointmentDate = await Appointment.findOne({
+        const recoverAppointment = await Appointment.findOne({
             where: 
             {
             id: parseInt(appointmentId)
-            }
-
+            },
         })
-        if(!appointmentDate) {
+        if(!recoverAppointment) {
             return res.status(404).json(
                 {
                     success: true,
@@ -145,7 +170,7 @@ export const getAppointmentById = async (req: Request, res: Response) => {
             {
                 success: true,
                 message: "appointment retrieved successfully",
-                data: appointmentDate
+                data: recoverAppointment
             })
     } catch (error) {
         res.status(500).json(

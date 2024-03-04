@@ -18,7 +18,6 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
             token,
             process.env.JWT_SECRET as string
         )
-        console.log(decoded)
 
         req.tokenData = decoded as TokenData
     next();

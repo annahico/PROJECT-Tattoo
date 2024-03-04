@@ -6,7 +6,7 @@ import { createServices, deleteServices, getServices, getServicesById, updateSer
 import { auth } from "./middlewares/auth";
 import { deleteUsers, getUserProfile, getUsers, updateProfile } from "./controllers/userControllers";
 import { superAdmin } from "./middlewares/superAdmin";
-import { createAppointment, getAppointmentById, updateAppointment } from "./controllers/appointment.Controller";
+import { createAppointment, getAppointment, getAppointmentById, updateAppointment } from "./controllers/appointment.Controller";
 
 
 
@@ -40,11 +40,11 @@ app.put('/api/users/profile',auth, updateProfile);
 //appointments routes
 app.post('/api/appointments',auth, createAppointment);
 
-app.put('/api/appointments', auth, updateAppointment);
+app.put('/api/appointments/:id', auth, updateAppointment);
 
 app.get('/api/appointments/:id',auth, getAppointmentById);
 
-app.get('/api/appointments',);
+app.get('/api/appointments',auth, getAppointment);
 
 
 //services routes

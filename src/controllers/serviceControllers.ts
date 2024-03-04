@@ -5,7 +5,7 @@ import { Service } from "../models/Service";
 // create services
 export const createServices = async (req: Request, res: Response) => {
     try {
-        console.log(req.body);
+
         const name = req.body.name;
         const description = req.body.description;
 

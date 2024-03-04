@@ -6,7 +6,6 @@ import { User } from "../models/User";
 // user register
 export const register = async (req: Request, res: Response) => {
     try {
-        console.log(req.body);
 
         const email = req.body.email; 
         const password = req.body.password;
@@ -31,7 +30,6 @@ export const register = async (req: Request, res: Response) => {
         }
 
             const passwordEncrypted = bcrypt.hashSync(password, 8);
-            console.log(passwordEncrypted)
 
             const newUser = await User.create({
                 firstName: firstName,
@@ -98,8 +96,6 @@ export const login = async(req: Request, res: Response) => {
                     }
                 }
             })
-            
-        console.log(user)
 
         if(!user) {
             return res.status(500).json(

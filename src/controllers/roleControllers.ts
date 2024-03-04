@@ -12,7 +12,7 @@ export const getRoles = (req: Request, res: Response) => {
 //create role
 export const createRoles = async (req: Request, res: Response) => { 
     const name = req.body.name; 
-    console.log(req.body)
+
     if (name.length > 50) {
         return res.status(400).json({
             success: false,
@@ -36,9 +36,7 @@ export const createRoles = async (req: Request, res: Response) => {
 //modified role
 export const updateRoles = (req: Request, res: Response) => {
 
-
     req.params.id;
-    console.log(req.params.id)
 
     res.status(200).json(
         {
@@ -51,7 +49,6 @@ export const updateRoles = (req: Request, res: Response) => {
 export const deleteRoles = (req: Request, res: Response) => {
 
     req.params.id;
-    console.log(req.params.id)
     res.status(200).json(
         {
             success: true,
