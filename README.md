@@ -54,15 +54,24 @@ Backend development for appointment management for a tattoo studio.
 - `npm install`.
 - Start Docker.
 - Start MySql.
-- Fill .env and bd.ts files with the corresponding data.
 - Create a new schema to import data.
+- Fill .env and bd.ts files with the corresponding data.
 - `npm run dev`.
 - `npm run run-migrations`.
 - Copy the data from the SQL folder into MySQL and execute the import.
 
 ### 2 - Enpoints:
 
+1. Register and Log:
 
+<image src="./img/exampleRegistred.png" alt="register">
+<image src="./img/exampleLog.png" alt="log">
+
+2. Users:
+
+3. Appointments:
+
+4. Services:
 
 
 
