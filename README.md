@@ -59,12 +59,15 @@ Backend development for appointment management for a tattoo studio.
 - `npm run dev`.
 - `npm run run-migrations`.
 - Copy the data from the SQL folder into MySQL and execute the import.
+- Import file CollectorProject4Backend_GimenoBayonaMarta for Thunder Client.
 
 ### 2 - Enpoints:
 
-NOTE: All passwords are 123456
+NOTE: All user passwords are: 123456
 
 1. Register and Log:
+
+-Register Endpoint:
 
 POST`localhost:4000/api/auth/register`
 
