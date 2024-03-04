@@ -7,7 +7,7 @@
 
 1. [Description :classical_building:](#description-classical_building)
 2. [Stack :gear:](#stack-gear) 
-3. [Development progress :open_book:](#development-progress-open_book) 
+3. [Project :open_book:](#development-progress-open_book) 
 4. [Bugs :boom:](#bugs-boom) 
 5. [Link :dart:](#link-dart) 
 6. [Author :wave:](#author-wave) 
@@ -44,9 +44,26 @@ Backend development for appointment management for a tattoo studio.
 
 ***
 
-## Development progress :open_book:
+## Project :open_book:
 
 <image src="./img/mysql_table.png" alt="Tattoo Studio">
+
+### 1 - Local Installation:
+
+- Clone repository.
+- `npm install`.
+- Start Docker.
+- Start MySql.
+- Fill .env and bd.ts files with the corresponding data.
+- Create a new schema to import data.
+- `npm run dev`.
+- `npm run run-migrations`.
+- Copy the data from the SQL folder into MySQL and execute the import.
+
+### 2 - Enpoints:
+
+
+
 
 
 
