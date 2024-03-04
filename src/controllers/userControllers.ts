@@ -6,6 +6,21 @@ import { User } from "../models/User";
 export const getUsers = async(req: Request, res: Response) => {
     try {
 
+        let limit = Number(req.query.limit) || 10 // generamos una variable para delimitar si se le va a pasar un numero de usuarios por query o que pase por defecto 10
+        const page = Number(req.query.page) || 1
+        const skip = (page-1)*limit
+
+        if(limit >100) 
+        {
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "has superado el límite"
+                }
+            )
+            console.log()
+        }
+
         const users = await User.find(
             {
                 select: {
@@ -16,7 +31,9 @@ export const getUsers = async(req: Request, res: Response) => {
                     password: true,
                     createdAt: true,
                     updatedAt: true
-                }
+                },
+                take: limit as number, // el take indica la cantidad de usuarios que vamos a recuperar
+                skip: skip// controlamos las páginas que vamos a recuperar.
             }
         )
         res.status(200).json (

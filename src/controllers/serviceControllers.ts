@@ -36,8 +36,10 @@ export const deleteServices = async (req:Request, res: Response) => {
     try {
         const serviceId = req.params.id
 
-        const serviceToRemove = await Service.findOneBy({
+        const serviceToRemove = await Service.findOne({
+            where: {
             id: parseInt(serviceId)
+            }
         })
         if(!serviceToRemove) {
             return res.status(404).json(
@@ -98,14 +100,17 @@ export const getServices = async (req: Request, res: Response) => {
 export const getServicesById = async (req: Request, res: Response) => {
     try {
         const serviceId = req.params.id
-        const service = await Service.findOneBy({
+        const service = await Service.findOne({
+            where: 
+            {
             id: parseInt(serviceId)
+            }
         })
         if(!service) {
             return res.status(404).json(
                 {
                     success: true,
-                    message: "seervice not found"
+                    message: "service not found"
                 })
         }
         res.status(200).json(
@@ -133,8 +138,10 @@ export const updateServices = async (req: Request, res: Response) => {
         const name = req.body.name;
         const description = req.body.description;
 
-        const service = await Service.findOneBy({
+        const service = await Service.findOne({
+            where: {
             id: parseInt(serviceId)
+            }
         })
         if(!service) {
             return res.status(404).json(
