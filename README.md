@@ -62,9 +62,36 @@ Backend development for appointment management for a tattoo studio.
 
 ### 2 - Enpoints:
 
+NOTE: All passwords are 123456
+
 1. Register and Log:
 
+POST`localhost:4000/api/auth/register`
+
+body:
+
+```
+{
+  "firstName": "Carmen",
+  "secondName": "Usuaria",
+  "email": "soyusercarmen@email.com",
+  "password": "123456"
+}
+```
 <image src="./img/exampleRegistred.png" alt="register">
+
+- Log Endpoint.
+
+POST`localhost:4000/api/auth/login`
+
+body:
+
+```
+{
+  "email": "super_admin@email.com",
+  "password": "123456"
+}
+```
 <image src="./img/exampleLog.png" alt="log">
 
 2. Users:
