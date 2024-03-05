@@ -134,7 +134,7 @@ export const deleteUsers = async (req:Request, res: Response) => {
             return res.status(404).json(
             {
                 success: false,
-                message: "service cant be deleted"
+                message: "user cant be deleted"
             })
         }
 
@@ -143,13 +143,13 @@ export const deleteUsers = async (req:Request, res: Response) => {
         res.status(200).json(
             {
                 success: true,
-                message: "service delete successfully"
+                message: "user delete successfully"
             })
     } catch (error) {
         res.status(500).json(
             {
                 success: false,
-                message: "service cant be delete",
+                message: "user cant be delete",
                 error: error
             })
     }

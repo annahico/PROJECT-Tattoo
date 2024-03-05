@@ -158,6 +158,19 @@ export const getAppointmentById = async (req: Request, res: Response) => {
             {
             id: parseInt(appointmentId)
             },
+            relations: {
+                service: true,
+                user: true
+            },
+            select: 
+            {
+                service: {
+                    name: true
+                },
+                user: {
+                    email: true
+                }
+            }
         })
         if(!recoverAppointment) {
             return res.status(404).json(
