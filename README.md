@@ -211,9 +211,64 @@ add user token.
 
 `GET localhost:4000/api/appointments/:id`
 
+Bearer token:
+
+add user token.
+
 <image src="./img/recover a appointment.png" alt="recover a appointment">
 
 4. Services:
+
+- View all services Enpoint:
+
+`GET localhost:4000/api/services`
+
+<image src="./img/view all services.png" alt="view services">
+
+- Create new service Endpoint:
+
+`POST localhost:4000/api/services`
+
+body:
+
+```
+{
+  "name": "hello, I'm new service",
+  "description": "I'm a new description"
+}
+```
+
+Bearer token:
+
+add token super_admin.
+
+<image src="./img/create new service.png" alt="create service">
+
+- Update service Enpoint:
+
+`PUT localhost:4000/api/services/:id`
+
+body:
+
+```
+{
+  "name": "update service successfully"
+}
+```
+
+Bearer token:
+
+add token super_admin.
+
+<image src="./img/update service.png" alt="update service">
+
+- Delete service Endpoint:
+
+`DELETE localhost:4000/api/services/:id`
+
+<image src="./img/delete service.png" alt="delete service">
+
+
 
 
 
