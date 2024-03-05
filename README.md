@@ -99,6 +99,55 @@ body:
 
 2. Users:
 
+- View all users:
+
+body:
+
+```
+{
+  "email": "super_admin@email.com",
+  "password": "123456"
+}
+```
+Bearer Token: 
+
+add token super_admin.
+
+<image src="./img/viewAllUsers.png" alt="viewAllUsers">
+
+- View user profile:
+
+Bearer token:
+
+add user token.
+
+<image src="./img/view user profile.png" alt="viewProfile">
+
+- Modified user profile:
+
+body:
+
+```
+{
+  "firstName": "add new name",
+}
+```
+
+Bearer token:
+
+add user token.
+
+<image src="./img/modified user profile.png" alt="modified profile">
+
+- Delete user:
+
+Bearer token:
+
+add super_admin token.
+
+<image src="./img/delete user.png" alt="delete user">
+
+
 3. Appointments:
 
 4. Services:

@@ -67,7 +67,6 @@ export const deleteServices = async (req:Request, res: Response) => {
 }
 
 // get services
-
 export const getServices = async (req: Request, res: Response) => {
     try {
 
@@ -131,7 +130,6 @@ export const getServicesById = async (req: Request, res: Response) => {
 }
 
 //update services
-
 export const updateServices = async (req: Request, res: Response) => {
     try {
         const serviceId = req.params.id;
@@ -177,4 +175,3 @@ export const updateServices = async (req: Request, res: Response) => {
         
     }
 }
-

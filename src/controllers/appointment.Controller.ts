@@ -14,7 +14,7 @@ export const createAppointment = async (req: Request, res: Response) => {
             return res.status(400).json(
             {
                 success: false,
-                message: "first name is needed",
+                message: "need log tu create appointment",
             })
         }
 
