@@ -7,8 +7,8 @@
 
 1. [Description :classical_building:](#description-classical_building)
 2. [Stack :gear:](#stack-gear) 
-3. [Project :open_book:](#development-progress-open_book) 
-4. [Bugs :boom:](#bugs-boom) 
+3. [Project :open_book:](#Project-open_book) 
+4. [Future functionalities :star2:](#Future-functionalities-star2) 
 5. [Link :dart:](#link-dart) 
 6. [Author :wave:](#author-wave) 
 
@@ -266,17 +266,38 @@ add token super_admin.
 
 `DELETE localhost:4000/api/services/:id`
 
+Bearer token:
+
+add token super_admin.
+
 <image src="./img/delete service.png" alt="delete service">
-
-
-
-
-
 
 
 ***
 
-## Bugs :boom:
+## Future functionalities :star2:
+
+- Generate enpoint, filter by email.
+
+- Generate endpoint, role change.
+
+- Limit appointment choices:
+
+  1. Prevent selection of expired days.
+
+  2. Limit hours selection to busines hours.
+
+- Prevent users from viewing and modifying appointments and hours of other users.
+
+- Require that users `firstName` and `secondName` do not contain numbers or special caracters.
+
+- Generate a new table for employees:
+
+  1. Link the table with services and appointments.
+
+  2. Allow users to choose specializad employees for each services.
+
+- Deploying code.
 
 
 
