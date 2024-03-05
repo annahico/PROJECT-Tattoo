@@ -69,7 +69,7 @@ NOTE: All user passwords are: 123456
 
 -Register Endpoint:
 
-POST`localhost:4000/api/auth/register`
+`POST localhost:4000/api/auth/register`
 
 body:
 
@@ -85,7 +85,7 @@ body:
 
 - Log Endpoint.
 
-POST`localhost:4000/api/auth/login`
+`POST localhost:4000/api/auth/login`
 
 body:
 
@@ -99,7 +99,9 @@ body:
 
 2. Users:
 
-- View all users:
+- View all users Endpoint:
+
+`GET localhost:4000/api/users`
 
 body:
 
@@ -115,7 +117,9 @@ add token super_admin.
 
 <image src="./img/viewAllUsers.png" alt="viewAllUsers">
 
-- View user profile:
+- View user profile Endpoint:
+
+`GET localhost:4000/api/users/profile`
 
 Bearer token:
 
@@ -123,7 +127,9 @@ add user token.
 
 <image src="./img/view user profile.png" alt="viewProfile">
 
-- Modified user profile:
+- Modified user profile Endpoint:
+
+`PUT localhost:4000/api/users/profile`
 
 body:
 
@@ -139,7 +145,9 @@ add user token.
 
 <image src="./img/modified user profile.png" alt="modified profile">
 
-- Delete user:
+- Delete user Endpoint:
+
+`DELETE localhost:4000/api/users/:id`
 
 Bearer token:
 
@@ -149,6 +157,61 @@ add super_admin token.
 
 
 3. Appointments:
+
+- Create appointments Endpoint:
+
+`POST localhost:4000/api/appointments`
+
+body:
+```
+{
+  "appointmentDate":"2027/03/20 10:00",
+  "user": "1",
+  "service":"1"
+}
+```
+Bearer token:
+
+add user token.
+
+<image src="./img/create appointment.png" alt="create appointment">
+
+- Update appointment Endpoint:
+
+`PUT localhost:4000/api/appointments/:id`
+
+body:
+
+```
+{
+"appointmentDate": "2026/10/10 15:30",
+"service": "5",
+"user": "10"
+  
+}
+```
+
+Bearer token:
+
+add user token.
+
+<image src="./img/update appointment.png" alt="update appointment">
+
+- Recover appointment Endpoint:
+
+`GET localhost:4000/api/appointments`
+
+Bearer token:
+
+add user token.
+
+<image src="./img/recover appointment.png" alt="recover appointment">
+
+- Recover a appointment Endpoint:
+
+`GET localhost:4000/api/appointments/:id`
+
+<image src="./img/recover a appointment.png" alt="recover a appointment">
 
 4. Services:
 
