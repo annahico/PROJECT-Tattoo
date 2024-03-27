@@ -91,6 +91,7 @@ export const login = async(req: Request, res: Response) => {
                     id: true,
                     password: true,
                     email: true,
+                    firstName: true,
                     role: {
                         name: true
                     }
