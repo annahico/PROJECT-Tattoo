@@ -7,12 +7,13 @@ import { auth } from "./middlewares/auth";
 import { deleteUsers, getUserProfile, getUsers, updateProfile } from "./controllers/userControllers";
 import { superAdmin } from "./middlewares/superAdmin";
 import { createAppointment, getAppointment, getAppointmentById, updateAppointment } from "./controllers/appointment.Controller";
-
+import cors from "cors";
 
 
 export const app: Application = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/healthy", (req, res) => {
     res.status(200).json({
