@@ -13,9 +13,8 @@ export const getUsers = async(req: Request, res: Response) => {
                     firstName: true,
                     secondName: true,
                     email: true,
-                    password: true,
                     createdAt: true,
-                    updatedAt: true
+                    updatedAt: true,
                 },
             }
         )
@@ -122,15 +121,18 @@ export const updateProfile = async(req:Request, res:Response) => {
 export const deleteUsers = async (req:Request, res: Response) => {
     try {
         const userId = req.params.id
+        
 
-        const serviceToRemove = await User.findOne(
+        const userToRemove = await User.findOne(
             {
                 where: {
                     id: parseInt(userId)
                 }
 
             })
-        if(!serviceToRemove) {
+
+
+        if(!userToRemove) {
             return res.status(404).json(
             {
                 success: false,
@@ -138,7 +140,14 @@ export const deleteUsers = async (req:Request, res: Response) => {
             })
         }
 
-        await User.remove(serviceToRemove);
+        if (userToRemove.id === 1) {
+            return res.status(400).json({
+                success: false,
+                message: "Super Admin cannot be deleted"
+            });
+        }
+
+        await User.remove(userToRemove);
 
         res.status(200).json(
             {
