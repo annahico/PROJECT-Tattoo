@@ -114,6 +114,7 @@ export const getAppointment = async (req: Request, res: Response) => {
             },
             select:
             {
+                id: true,
                 service:
                 {
                     name: true
