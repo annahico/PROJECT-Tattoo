@@ -6,7 +6,7 @@ import { createServices, deleteServices, getServices, getServicesById, updateSer
 import { auth } from "./middlewares/auth";
 import { deleteUsers, getUserProfile, getUsers, updateProfile } from "./controllers/userControllers";
 import { superAdmin } from "./middlewares/superAdmin";
-import { createAppointment, getAppointment, getAppointmentById, updateAppointment } from "./controllers/appointment.Controller";
+import { createAppointment, deleteAppointments, getAppointment, getAppointmentById, updateAppointment } from "./controllers/appointment.Controller";
 import cors from "cors";
 
 
@@ -46,6 +46,8 @@ app.put('/api/appointments/:id', auth, updateAppointment);
 app.get('/api/appointments/:id',auth, getAppointmentById);
 
 app.get('/api/appointments',auth, getAppointment);
+
+app. delete(`/api/appointments`, auth, deleteAppointments)
 
 
 //services routes

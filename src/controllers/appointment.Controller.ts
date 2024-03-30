@@ -6,8 +6,7 @@ import { Appointment } from "../models/Appointment";
 export const createAppointment = async (req: Request, res: Response) => {
     try {
         const appointmentDate = req.body.appointmentDate;
-        const user = req.body.user;
-        const service = req.body.service;
+        const service = parseInt(req.body.service);
         const userId = req.tokenData.userId;
 
         if (!userId) {
@@ -20,8 +19,12 @@ export const createAppointment = async (req: Request, res: Response) => {
 
         const newAppointment = await Appointment.create({
             appointmentDate: appointmentDate,
-            user: user,
-            service: service,
+            user:{
+                id: userId
+            },
+            service:{
+                id: service
+            } 
 
         }).save()
 
@@ -193,5 +196,29 @@ export const getAppointmentById = async (req: Request, res: Response) => {
                 error: error
             })
 
+    }
+}
+
+// delete Appointment
+
+export const deleteAppointments = async (req: Request, res: Response) => {
+
+    try {
+        const appointmentId = parseInt(req.body.id);
+
+        Appointment.delete(
+            { id: appointmentId}
+        )
+
+        res.status(200).json({
+            "success": true,
+            "message": "Appointment deleted successfuly"
+        })
+    }catch(error){
+        res.status(500).json({
+            success: false,
+            message: "appointment cant be deleted",
+            error: error
+        })
     }
 }
