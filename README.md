@@ -61,7 +61,7 @@ app.listen(PORT, () => {
 
 6. Comprobamos que funciona el servidor con el comando:
 ```sh
-$ npm run dev
+npm run dev
 ```
 
 
@@ -70,10 +70,10 @@ $ npm run dev
 $ npm install --save sequelize
 ```
 ```sh
-$ npm install --save mysql2
+npm install --save mysql2
 ```
 ```sh
-$ npm install --save-dev sequelize-cli
+npm install --save-dev sequelize-cli
 ```
 
 1. Creamos el fichero .sequelizerc
@@ -95,15 +95,15 @@ DATABASE_URL=mysql://root:1234@localhost:3307
 ```
 
 ```sh
-$ npx sequelize-cli init
+npx sequelize-cli init
 ```
 
 ```sh
-$ npx sequelize-cli model:generate --name Role --attributes name:string
+npx sequelize-cli model:generate --name Role --attributes name:string
 ```
 
 ```sh
-$ npx sequelize-cli db:migrate
+npx sequelize-cli db:migrate
 ```
 
 ```sh
