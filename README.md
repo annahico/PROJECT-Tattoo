@@ -1,18 +1,18 @@
 ### INICIALIZAR PROYECTO NODE
 ```sh
-$ npm init
+npm init
 ```
 
 ```sh
-$ npm install express
+npm install express
 ```
 
 ```sh
-$ npm install nodemon -D
+npm install nodemon -D
 ```
 
 ```sh
-$ npm install dotenv
+npm install dotenv
 ```
 
 1. Creamos archivo .gitignore
@@ -67,7 +67,7 @@ npm run dev
 
 ### Sequelize installation
 ```sh
-$ npm install --save sequelize
+npm install --save sequelize
 ```
 ```sh
 npm install --save mysql2
