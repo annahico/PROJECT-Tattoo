@@ -10,6 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       appointment_date: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       user_id: {
