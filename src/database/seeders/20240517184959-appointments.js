@@ -7,7 +7,7 @@ module.exports = {
     await queryInterface.bulkInsert('Appointments',
       [
         {
-          appointment_date: new Date(),
+          appointment_date: new Date('2024-05-22T11:02:30'),
           user_id: 1,
           service_id: 1,
           createdAt: new Date(),
