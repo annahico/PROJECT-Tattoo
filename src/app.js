@@ -60,7 +60,13 @@ app.delete("/api/roles", async (req, res) => {
 });
 
 
-//server
-app.listen(PORT, () => {
+
+app.listen(PORT, () => {  //arrancar del servidor
     console.log(`Server listening on port: ${PORT}`);
+});
+
+sequelize.authenticate(). then(() => { //para autentificar la base de datos
+    console.log('Database authenticated');
+}).catch(() => {
+    console.log('Error authenticating database');
 });
