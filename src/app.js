@@ -25,19 +25,17 @@ app.get('/api/healthy', (req, res) => {
 app.post("/api/roles", async (req, res) => {
     try {
         const { id, name } = req.body;
-
         const newRole = await Role.create({ id, name });
-
         res.status(200).json({
             success: true,
             message: "Role created successfully",
-            data: newRole,
+            data: newRole
         });
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error creating role",
-            error: error.message,
+            error: error.message
         });
     }
 });
@@ -46,17 +44,16 @@ app.post("/api/roles", async (req, res) => {
 app.get("/api/roles", async (req, res) => {
     try {
         const roles = await Role.findAll();
-
         res.status(200).json({
             success: true,
             message: "Roles retrieved successfully",
-            data: roles,
+            data: roles
         });
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error retrieving roles",
-            error: error.message,
+            error: error.message
         });
     }
 });
@@ -66,24 +63,23 @@ app.get("/api/roles/:id", async (req, res) => {
     try {
         const roleId = req.params.id;
         const role = await Role.findByPk(roleId);
-
         if (role) {
             res.status(200).json({
                 success: true,
                 message: "Role retrieved successfully",
-                data: role,
+                data: role
             });
         } else {
             res.status(404).json({
                 success: false,
-                message: "Role not found",
+                message: "Role not found"
             });
         }
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error retrieving role",
-            error: error.message,
+            error: error.message
         });
     }
 });
@@ -92,30 +88,28 @@ app.get("/api/roles/:id", async (req, res) => {
 app.put("/api/roles/:id", async (req, res) => {
     try {
         const roleId = req.params.id;
-        const { name } = req.body;
-
-        const role = await Role.findByPk(roleId);
-
-        if (role) {
-            role.name = name;
-            await role.save();
-
+        const roleData = req.body;
+        const [updated] = await Role.update(roleData, {
+            where: { id: roleId }
+        });
+        if (updated) {
+            const updatedRole = await Role.findByPk(roleId);
             res.status(200).json({
                 success: true,
                 message: "Role updated successfully",
-                data: role,
+                data: updatedRole
             });
         } else {
             res.status(404).json({
                 success: false,
-                message: "Role not found",
+                message: "Role not found"
             });
         }
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error updating role",
-            error: error.message,
+            error: error.message
         });
     }
 });
@@ -124,26 +118,25 @@ app.put("/api/roles/:id", async (req, res) => {
 app.delete("/api/roles/:id", async (req, res) => {
     try {
         const roleId = req.params.id;
-        const role = await Role.findByPk(roleId);
-
-        if (role) {
-            await role.destroy();
-
+        const deleted = await Role.destroy({
+            where: { id: roleId }
+        });
+        if (deleted) {
             res.status(200).json({
                 success: true,
-                message: "Role deleted successfully",
+                message: "Role deleted successfully"
             });
         } else {
             res.status(404).json({
                 success: false,
-                message: "Role not found",
+                message: "Role not found"
             });
         }
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error deleting role",
-            error: error.message,
+            error: error.message
         });
     }
 });
