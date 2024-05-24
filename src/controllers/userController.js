@@ -3,8 +3,8 @@ const { User } = require("../models");
 
 userController.create = async (req, res) => {
     try {
-        const { first_name, last_name, email, password_hash, role_id } = req.body; // Eliminado 'id'
-        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id }); // Eliminado 'id'
+        const { id, first_name, last_name, email, password_hash, role_id } = req.body;
+        const newUser = await User.create({first_name, last_name, email, password_hash, role_id });
         res.status(200).json({
             success: true,
             message: "User created successfully",
@@ -18,7 +18,6 @@ userController.create = async (req, res) => {
         });
     }
 };
-
 
 userController.getAll = async (req, res) => {
     try {

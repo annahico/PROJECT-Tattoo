@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const sequelize = require("./database/db.js");
 const roleController = require("./controllers/roleController.js");
 const userController = require("./controllers/userController.js");
+const serviceController = require("./controllers/serviceController.js");
+const appointmentController = require("./controllers/appointmentController.js");
 
 dotenv.config();
 
@@ -33,6 +35,25 @@ app.get("/api/users", userController.getAll);
 app.get("/api/users/:id", userController.getById);
 app.put("/api/users/:id", userController.update);
 app.delete("/api/users/:id", userController.delete);
+
+// SERVICE ENDPOINT
+// SERVICE ENDPOINT
+app.post("/api/services", serviceController.create);
+app.get("/api/services", serviceController.getAll);
+app.get("/api/services/:id", serviceController.getById);
+app.put("/api/services/:id", serviceController.update);
+app.delete("/api/services/:id", serviceController.delete);
+
+
+
+// APPOINTMENT END POINT
+// APPOINTMENT END POINT
+app.post("/api/appointments", appointmentController.create); // Corregido appointmentService a appointmentController
+app.get("/api/appointments", appointmentController.getAll); // Corregido appointmentService a appointmentController
+app.get("/api/appointments/:id", appointmentController.getById); // Corregido appointmentService a appointmentController
+app.put("/api/appointments/:id", appointmentController.update); // Corregido appointmentService a appointmentController
+app.delete("/api/appointments/:id", appointmentController.delete); // Corregido appointmentService a appointmentController
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
