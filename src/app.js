@@ -2,6 +2,8 @@ const express = require('express')
 // require('dotenev').config()
 const dotenv = require('dotenv')
 const sequelize = require("./database/db.js")
+const {Role} = require("./models/index.js"); //con index no es necesario ponerlo, ya que viene por defecto
+//se pone el modelo 
 dotenv.config();
 
 const app = express()
@@ -21,9 +23,13 @@ app.get('/api/healthy', (req, res) => {
 
 //create
 app.post("/api/roles", async (req, res) => {
+
+    const roles = await Role.findAll();
+
     res.status(200).json({
         success: true,
         message: "Role created successfully",
+        data: roles,
     });
 });
 
