@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const sequelize = require("./database/db.js");
-const { Role } = require("./models/index.js");
+const roleController = require("./controllers/roleController.js");
 
 dotenv.config();
 
@@ -20,126 +20,11 @@ app.get('/api/healthy', (req, res) => {
 });
 
 // CRUD DE ROLE
-
-// Create
-app.post("/api/roles", async (req, res) => {
-    try {
-        const { id, name } = req.body;
-        const newRole = await Role.create({ id, name });
-        res.status(200).json({
-            success: true,
-            message: "Role created successfully",
-            data: newRole
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error creating role",
-            error: error.message
-        });
-    }
-});
-
-// Get all
-app.get("/api/roles", async (req, res) => {
-    try {
-        const roles = await Role.findAll();
-        res.status(200).json({
-            success: true,
-            message: "Roles retrieved successfully",
-            data: roles
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error retrieving roles",
-            error: error.message
-        });
-    }
-});
-
-// Get by ID
-app.get("/api/roles/:id", async (req, res) => {
-    try {
-        const roleId = req.params.id;
-        const role = await Role.findByPk(roleId);
-        if (role) {
-            res.status(200).json({
-                success: true,
-                message: "Role retrieved successfully",
-                data: role
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "Role not found"
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error retrieving role",
-            error: error.message
-        });
-    }
-});
-
-// Update
-app.put("/api/roles/:id", async (req, res) => {
-    try {
-        const roleId = req.params.id;
-        const roleData = req.body;
-        const [updated] = await Role.update(roleData, {
-            where: { id: roleId }
-        });
-        if (updated) {
-            const updatedRole = await Role.findByPk(roleId);
-            res.status(200).json({
-                success: true,
-                message: "Role updated successfully",
-                data: updatedRole
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "Role not found"
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error updating role",
-            error: error.message
-        });
-    }
-});
-
-// Delete
-app.delete("/api/roles/:id", async (req, res) => {
-    try {
-        const roleId = req.params.id;
-        const deleted = await Role.destroy({
-            where: { id: roleId }
-        });
-        if (deleted) {
-            res.status(200).json({
-                success: true,
-                message: "Role deleted successfully"
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "Role not found"
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error deleting role",
-            error: error.message
-        });
-    }
-});
+app.post("/api/roles", roleController.create);
+app.get("/api/roles", roleController.getAll);
+app.get("/api/roles/:id", roleController.getById);
+app.put("/api/roles/:id", roleController.update);
+app.delete("/api/roles/:id", roleController.delete);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
