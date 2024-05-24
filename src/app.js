@@ -2,7 +2,7 @@ const express = require('express')
 // require('dotenev').config()
 const dotenv = require('dotenv')
 const sequelize = require("./database/db.js")
-const {Role} = require("./models/index.js"); //con index no es necesario ponerlo, ya que viene por defecto
+const { Role } = require("./models/index.js"); //con index no es necesario ponerlo, ya que viene por defecto
 //se pone el modelo 
 dotenv.config();
 
@@ -23,29 +23,35 @@ app.get('/api/healthy', (req, res) => {
 
 //create
 app.post("/api/roles", async (req, res) => {
-
-    const roles = await Role.findAll();
-
     res.status(200).json({
         success: true,
         message: "Role created successfully",
-        data: roles,
     });
 });
 
 //get all
 app.get("/api/roles", async (req, res) => {
+
+    const roles = await Role.findAll();
+
     res.status(200).json({
         success: true,
         message: "Role retreived successfully",
+        data: roles,
     });
 });
 
 // get by id
-app.get("/api/roles", async (req, res) => {
+app.get("/api/roles/id", async (req, res) => {
+
+    const roleId = req.params.id;
+
+    const role = await Role.findByPk(roleId);
+
     res.status(200).json({
         success: true,
         message: "Author retreived successfully",
+        data: role,
     });
 });
 
@@ -71,7 +77,7 @@ app.listen(PORT, () => {  //arrancar del servidor
     console.log(`Server listening on port: ${PORT}`);
 });
 
-sequelize.authenticate(). then(() => { //para autentificar la base de datos
+sequelize.authenticate().then(() => { //para autentificar la base de datos
     console.log('Database authenticated');
 }).catch(() => {
     console.log('Error authenticating database');

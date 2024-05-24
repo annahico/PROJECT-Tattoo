@@ -11,7 +11,7 @@ module.exports = {
           last_name: 'Wong',
           email: 'adawong@example.es',
           password_hash: '1234',
-          role_id: 1,
+          role_id: 3,
           createdAt: new Date(),
           updatedAt: new Date()
         },

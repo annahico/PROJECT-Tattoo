@@ -8,10 +8,22 @@ module.exports = {
       [
         {
           id: 1,
-          name: 'Ada Wong',
+          name: 'Owner',
           createdAt: new Date(),
           updatedAt: new Date()
-        }
+        },
+        {
+          id: 2,
+          name: 'Staff',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          id: 3,
+          name: 'Client',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ],
       {}
     );
