@@ -1,14 +1,14 @@
 const appointmentController = {};
-const { Appointments } = require("../database/models");
+const { Appointment, Service } = require("../database/models");
 
-appointmentController.create = async (req, res) => { // Corregido el nombre del controlador
+appointmentController.create = async (req, res) => {
     try {
-        const { appointment_date, user_id, service_id } = req.body; // Corregido el nombre de las propiedades
-        const newAppointment = await Appointments.create({ appointment_date, user_id, service_id }); // Corregido el nombre del modelo
+        const { appointment_date, user_id, service_id } = req.body;
+        const newAppointment = await Appointment.create({ appointment_date, user_id, service_id }); // Corregido
         res.status(200).json({
             success: true,
             message: "Appointment created successfully",
-            data: newAppointment // Corregido el nombre de la variable
+            data: newAppointment
         });
     } catch (error) {
         res.status(500).json({
@@ -21,16 +21,16 @@ appointmentController.create = async (req, res) => { // Corregido el nombre del 
 
 appointmentController.getAll = async (req, res) => {
     try {
-        const appopintments = await Appopintment.findAll();
+        const appointments = await Appointment.findAll(); // Corregido
         res.status(200).json({
             success: true,
-            message: "Appopintmenta retrieved successfully",
-            data: Appopintments
+            message: "Appointments retrieved successfully",
+            data: appointments // Corregido
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error retrieving appopintments",
+            message: "Error retrieving appointments",
             error: error.message
         });
     }
@@ -38,53 +38,64 @@ appointmentController.getAll = async (req, res) => {
 
 appointmentController.getById = async (req, res) => {
     try {
-        const appopintmentId = req.params.id;
-        const appopintment = await Appopintment.findByPk(appopintmentId);
-        if (appopintment) {
+        const appointmentId = req.params.id;
+        const appointment = await Appointment.findByPk(appointmentId, {
+            include: [
+                {
+                    model: Service,
+                    as: 'services', 
+                    attributes: { exclude: ["createdAt", "updatedAt"] },
+                },
+            ],
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+        });
+        if (appointment) {
             res.status(200).json({
                 success: true,
-                message: "Appopintment retrieved successfully",
-                data: appopintment
+                message: "Appointment retrieved successfully",
+                data: appointment
             });
         } else {
             res.status(404).json({
                 success: false,
-                message: "appopintment not found"
+                message: "Appointment not found"
             });
         }
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error retrieving appopintment",
+            message: "Error retrieving appointment",
             error: error.message
         });
     }
 };
 
+
+
 appointmentController.update = async (req, res) => {
     try {
-        const appopintmentId = req.params.id;
-        const appopintmentData = req.body;
-        const [updated] = await Appopintment.update(appopintmentData, {
-            where: { id: appopintmentId }
+        const appointmentId = req.params.id;
+        const appointmentData = req.body;
+        const [updated] = await Appointment.update(appointmentData, {
+            where: { id: appointmentId }
         });
         if (updated) {
-            const updatedAppopintment = await Appopintment.findByPk(appopintmentId);
+            const updatedAppointment = await Appointment.findByPk(appointmentId);
             res.status(200).json({
                 success: true,
-                message: "Appopintment updated successfully",
-                data: updatedAppopintment
+                message: "Appointment updated successfully",
+                data: updatedAppointment
             });
         } else {
             res.status(404).json({
                 success: false,
-                message: "Appopintment not found"
+                message: "Appointment not found"
             });
         }
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error updating appopintment",
+            message: "Error updating appointment",
             error: error.message
         });
     }
@@ -92,25 +103,25 @@ appointmentController.update = async (req, res) => {
 
 appointmentController.delete = async (req, res) => {
     try {
-        const appopintmentId = req.params.id;
-        const deleted = await Appopintment.destroy({
-            where: { id: appopintmentId }
+        const appointmentId = req.params.id;
+        const deleted = await Appointment.destroy({
+            where: { id: appointmentId }
         });
         if (deleted) {
             res.status(200).json({
                 success: true,
-                message: "Appopintment deleted successfully"
+                message: "Appointment deleted successfully"
             });
         } else {
             res.status(404).json({
                 success: false,
-                message: "Appopintment not found"
+                message: "Appointment not found"
             });
         }
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error deleting appopintment",
+            message: "Error deleting appointment",
             error: error.message
         });
     }

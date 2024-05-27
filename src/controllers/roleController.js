@@ -44,7 +44,7 @@ roleController.getById = async (req, res) => {
                 {
                     model: User,
                     as: 'Users', // Corregido aquí
-                    attributes: { exclude: ["createdAt", "updatedAt"] },
+                    attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
                 },
             ],
             attributes: { exclude: ["createdAt", "updatedAt"] },

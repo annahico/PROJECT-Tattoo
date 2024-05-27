@@ -4,7 +4,6 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // Asegúrate de que el modelo Role existe y está definido correctamente
       User.belongsTo(models.Role, {
         as: 'role', // alias, se genera un método especial
         foreignKey: "role_id",

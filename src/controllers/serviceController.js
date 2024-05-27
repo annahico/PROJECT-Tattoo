@@ -1,5 +1,5 @@
 const serviceController = {};
-const { Service } = require("../database/models");
+const { Service, Appointment } = require("../database/models");
 
 serviceController.create = async (req, res) => {
     try {
@@ -40,7 +40,16 @@ serviceController.getAll = async (req, res) => {
 serviceController.getById = async (req, res) => {
     try {
         const serviceId = req.params.id;
-        const service = await Service.findByPk(serviceId);
+        const service = await Service.findByPk(serviceId, {
+            include: [
+                {
+                    model: Appointment,
+                    as: 'Appointments', // Cambiado el alias para que coincida con el definido en la asociación
+                    attributes: { exclude: ["createdAt", "updatedAt"] },
+                },
+            ],
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+        });
         if (service) {
             res.status(200).json({
                 success: true,
@@ -61,6 +70,8 @@ serviceController.getById = async (req, res) => {
         });
     }
 };
+
+
 
 serviceController.update = async (req, res) => {
     try {
