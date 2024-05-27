@@ -4,7 +4,7 @@ const { Appointment, Service } = require("../database/models");
 appointmentController.create = async (req, res) => {
     try {
         const { appointment_date, user_id, service_id } = req.body;
-        const newAppointment = await Appointment.create({ appointment_date, user_id, service_id }); // Corregido
+        const newAppointment = await Appointment.create({ appointment_date, user_id, service_id });
         res.status(200).json({
             success: true,
             message: "Appointment created successfully",
@@ -21,11 +21,11 @@ appointmentController.create = async (req, res) => {
 
 appointmentController.getAll = async (req, res) => {
     try {
-        const appointments = await Appointment.findAll(); // Corregido
+        const appointments = await Appointment.findAll();
         res.status(200).json({
             success: true,
             message: "Appointments retrieved successfully",
-            data: appointments // Corregido
+            data: appointments
         });
     } catch (error) {
         res.status(500).json({
@@ -43,7 +43,7 @@ appointmentController.getById = async (req, res) => {
             include: [
                 {
                     model: Service,
-                    as: 'services', 
+                    as: 'Service',
                     attributes: { exclude: ["createdAt", "updatedAt"] },
                 },
             ],
@@ -69,8 +69,6 @@ appointmentController.getById = async (req, res) => {
         });
     }
 };
-
-
 
 appointmentController.update = async (req, res) => {
     try {
