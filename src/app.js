@@ -37,7 +37,6 @@ app.put("/api/users/:id", userController.update);
 app.delete("/api/users/:id", userController.delete);
 
 // SERVICE ENDPOINT
-// SERVICE ENDPOINT
 app.post("/api/services", serviceController.create);
 app.get("/api/services", serviceController.getAll);
 app.get("/api/services/:id", serviceController.getById);
@@ -45,8 +44,6 @@ app.put("/api/services/:id", serviceController.update);
 app.delete("/api/services/:id", serviceController.delete);
 
 
-
-// APPOINTMENT END POINT
 // APPOINTMENT END POINT
 app.post("/api/appointments", appointmentController.create); // Corregido appointmentService a appointmentController
 app.get("/api/appointments", appointmentController.getAll); // Corregido appointmentService a appointmentController

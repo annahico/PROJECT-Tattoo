@@ -1,5 +1,5 @@
 const serviceController = {};
-const { Service } = require("../models");
+const { Service } = require("../database/models");
 
 serviceController.create = async (req, res) => {
     try {

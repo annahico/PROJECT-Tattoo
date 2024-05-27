@@ -1,5 +1,5 @@
 const appointmentController = {};
-const { Appointments } = require("../models");
+const { Appointments } = require("../database/models");
 
 appointmentController.create = async (req, res) => { // Corregido el nombre del controlador
     try {
@@ -35,7 +35,6 @@ appointmentController.getAll = async (req, res) => {
         });
     }
 };
-
 
 appointmentController.getById = async (req, res) => {
     try {

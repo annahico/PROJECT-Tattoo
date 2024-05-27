@@ -1,5 +1,5 @@
 const roleController = {};
-const { Role } = require("../models");
+const { Role } = require("../database/models");
 
 roleController.create = async (req, res) => {
     try {
