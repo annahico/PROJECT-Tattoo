@@ -1,10 +1,10 @@
 const userController = {};
-const { User } = require("../database/models");
+const { User, Role } = require("../database/models");
 
 userController.create = async (req, res) => {
     try {
         const { id, first_name, last_name, email, password_hash, role_id } = req.body;
-        const newUser = await User.create({first_name, last_name, email, password_hash, role_id });
+        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
         res.status(200).json({
             success: true,
             message: "User created successfully",
@@ -40,7 +40,13 @@ userController.getAll = async (req, res) => {
 userController.getById = async (req, res) => {
     try {
         const userId = req.params.id;
-        const user = await User.findByPk(userId);
+        const user = await User.findByPk(userId, {
+            include: [
+                {
+                    model: Role,
+                },
+            ],
+        });
         if (user) {
             res.status(200).json({
                 success: true,
