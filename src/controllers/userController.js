@@ -44,8 +44,11 @@ userController.getById = async (req, res) => {
             include: [
                 {
                     model: Role,
+                    as: 'role',
+                    attributes: { exclude: ["createdAt", "updatedAt"] }, // Coma faltante aquí
                 },
             ],
+            attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
         });
         if (user) {
             res.status(200).json({
@@ -67,6 +70,7 @@ userController.getById = async (req, res) => {
         });
     }
 };
+
 
 userController.update = async (req, res) => {
     try {

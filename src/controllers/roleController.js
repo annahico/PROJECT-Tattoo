@@ -1,5 +1,5 @@
 const roleController = {};
-const { Role } = require("../database/models");
+const { Role, User } = require("../database/models");
 
 roleController.create = async (req, res) => {
     try {
@@ -39,7 +39,16 @@ roleController.getAll = async (req, res) => {
 roleController.getById = async (req, res) => {
     try {
         const roleId = req.params.id;
-        const role = await Role.findByPk(roleId);
+        const role = await Role.findByPk(roleId, {
+            include: [
+                {
+                    model: User,
+                    as: 'Users', // Corregido aquí
+                    attributes: { exclude: ["createdAt", "updatedAt"] },
+                },
+            ],
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+        });
         if (role) {
             res.status(200).json({
                 success: true,
@@ -60,6 +69,7 @@ roleController.getById = async (req, res) => {
         });
     }
 };
+
 
 roleController.update = async (req, res) => {
     try {
