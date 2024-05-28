@@ -10,24 +10,30 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       first_name: {
-        type: Sequelize.STRING // Cambiado de 'name' a 'first_name'
+        type: Sequelize.STRING,
+        allowNull: false
       },
       last_name: {
-        type: Sequelize.STRING // Cambiado de 'name' a 'last_name'
+        type: Sequelize.STRING,
+        allowNull: false
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       password_hash: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       role_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Roles",
+          model: 'Roles',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
