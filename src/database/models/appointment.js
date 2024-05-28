@@ -5,20 +5,20 @@ module.exports = (sequelize, DataTypes) => {
   class Appointment extends Model {
     static associate(models) {
       Appointment.belongsTo(models.Service, {
-        as: "service",
+        as: "service",  // Alias corregido
         foreignKey: "service_id",
       });
 
       Appointment.belongsTo(models.User, {
-        as: "user",
+        as: "user",  // Alias corregido
         foreignKey: "user_id",
       });
     }
   }
   Appointment.init({
-    appointment_date: DataTypes.DATE, // Agregado el campo appointment_date
-    user_id: DataTypes.INTEGER, // Agregado el campo user_id
-    service_id: DataTypes.INTEGER // Agregado el campo service_id
+    appointment_date: DataTypes.DATE,
+    user_id: DataTypes.INTEGER,
+    service_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Appointment',

@@ -43,7 +43,7 @@ appointmentController.getById = async (req, res) => {
             include: [
                 {
                     model: Service,
-                    as: 'Service',
+                    as: 'service',  // Alias corregido
                     attributes: { exclude: ["createdAt", "updatedAt"] },
                 },
             ],

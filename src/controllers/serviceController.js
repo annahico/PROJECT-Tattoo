@@ -4,7 +4,7 @@ const { Service, Appointment } = require("../database/models");
 serviceController.create = async (req, res) => {
     try {
         const { service_name, description } = req.body;
-        const newService = await Service.create({ service_name, description }); // Corregido 'User' por 'Service'
+        const newService = await Service.create({ service_name, description });
         res.status(200).json({
             success: true,
             message: "Service created successfully",
@@ -21,11 +21,11 @@ serviceController.create = async (req, res) => {
 
 serviceController.getAll = async (req, res) => {
     try {
-        const service = await Service.findAll();
+        const services = await Service.findAll();  // Corregido 'service' por 'services'
         res.status(200).json({
             success: true,
-            message: "Service retrieved successfully",
-            data: services
+            message: "Services retrieved successfully",
+            data: services  // Corregido 'service' por 'services'
         });
     } catch (error) {
         res.status(500).json({
@@ -36,7 +36,6 @@ serviceController.getAll = async (req, res) => {
     }
 };
 
-
 serviceController.getById = async (req, res) => {
     try {
         const serviceId = req.params.id;
@@ -44,7 +43,7 @@ serviceController.getById = async (req, res) => {
             include: [
                 {
                     model: Appointment,
-                    as: 'Appointments', // Cambiado el alias para que coincida con el definido en la asociación
+                    as: 'appointments',  // Alias corregido
                     attributes: { exclude: ["createdAt", "updatedAt"] },
                 },
             ],
@@ -70,8 +69,6 @@ serviceController.getById = async (req, res) => {
         });
     }
 };
-
-
 
 serviceController.update = async (req, res) => {
     try {
