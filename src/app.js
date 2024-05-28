@@ -19,7 +19,7 @@ app.get('/api/healthy', (req, res) => {
     });
 });
 
-app.use('/api', apiRoutes);
+app.use('/api', apiRoutes); //register API routes
 
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
