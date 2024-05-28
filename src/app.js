@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const sequelize = require("./database/db.js");
+const apiRoutes = require("./database/routes");
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.get('/api/healthy', (req, res) => {
         message: "My APP server is healthy"
     });
 });
+
+app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);

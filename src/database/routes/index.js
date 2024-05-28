@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const authorRoutes = requiere("./role.routes.js");
-const userRoutes = requiere("./user.routes.js");
-const serviceRoutes = requiere("./service.routes.js");
-const appointmentRoutes = requiere("./appointment.routes.js");
+const roleRoutes = require("./role.routes.js");
+const userRoutes = require("./user.routes.js");
+const serviceRoutes = require("./service.routes.js");
+const appointmentRoutes = require("./appointment.routes.js");
 
 router.use("/roles", roleRoutes);
 router.use("/users", userRoutes);
