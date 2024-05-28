@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController = require("../../controllers/userController"); // Verifica la ruta de importación
+const userController = require("../../controllers/userController");
 
 // User routes
 router.get('/appointment', userController.getUserAppointments);

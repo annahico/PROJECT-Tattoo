@@ -17,21 +17,17 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users',
+          model: "Users",
           key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        }
       },
       service_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Services',
+          model: "Services",
           key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        }
       },
       createdAt: {
         allowNull: false,

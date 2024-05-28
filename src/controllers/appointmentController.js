@@ -1,5 +1,6 @@
-const appointmentController = {};
 const { Appointment, Service } = require("../database/models");
+
+const appointmentController = {};
 
 appointmentController.create = async (req, res) => {
     try {

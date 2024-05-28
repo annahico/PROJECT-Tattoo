@@ -10,12 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       service_name: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.TEXT,
-        allowNull: true
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

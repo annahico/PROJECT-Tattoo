@@ -1,10 +1,9 @@
-const { User, Role } = require("../database/models");
-
 const userController = {};
+const { User, Role } = require("../database/models");
 
 userController.create = async (req, res) => {
     try {
-        const { first_name, last_name, email, password_hash, role_id } = req.body;
+        const { id, first_name, last_name, email, password_hash, role_id } = req.body;
         const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
         res.status(200).json({
             success: true,
@@ -37,6 +36,7 @@ userController.getAll = async (req, res) => {
     }
 };
 
+
 userController.getById = async (req, res) => {
     try {
         const userId = req.params.id;
@@ -45,7 +45,7 @@ userController.getById = async (req, res) => {
                 {
                     model: Role,
                     as: 'role',
-                    attributes: { exclude: ["createdAt", "updatedAt"] },
+                    attributes: { exclude: ["createdAt", "updatedAt"] }, // Coma faltante aquí
                 },
             ],
             attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
@@ -70,6 +70,7 @@ userController.getById = async (req, res) => {
         });
     }
 };
+
 
 userController.update = async (req, res) => {
     try {
@@ -124,32 +125,6 @@ userController.delete = async (req, res) => {
             error: error.message
         });
     }
-};
-
-// Funciones faltantes (puedes implementar estas funciones de acuerdo a tu lógica)
-userController.getUserAppointments = async (req, res) => {
-    // Implementar lógica
-    res.status(200).send("Get user appointments");
-};
-
-userController.getUserservices = async (req, res) => {
-    // Implementar lógica
-    res.status(200).send("Get user services");
-};
-
-userController.addAppointmentsToUser = async (req, res) => {
-    // Implementar lógica
-    res.status(200).send("Add appointments to user");
-};
-
-userController.removeUserAppointmentsFromUser = async (req, res) => {
-    // Implementar lógica
-    res.status(200).send("Remove user appointments from user");
-};
-
-userController.getServicesByUserId = async (req, res) => {
-    // Implementar lógica
-    res.status(200).send("Get services by user ID");
 };
 
 module.exports = userController;
