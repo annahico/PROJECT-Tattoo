@@ -5,7 +5,13 @@ module.exports = (sequelize, DataTypes) => {
   class Appointment extends Model {
     static associate(models) {
       Appointment.belongsTo(models.Service, {
+        as: "service",
         foreignKey: "service_id",
+      });
+
+      Appointment.belongsTo(models.User, {
+        as: "user",
+        foreignKey: "user_id",
       });
     }
   }

@@ -3,8 +3,8 @@ const { Role, User } = require("../database/models");
 
 roleController.create = async (req, res) => {
     try {
-        const { id, name } = req.body;
-        const newRole = await Role.create({ id, name });
+        const { name } = req.body;
+        const newRole = await Role.create({ name });
         res.status(200).json({
             success: true,
             message: "Role created successfully",
@@ -43,7 +43,7 @@ roleController.getById = async (req, res) => {
             include: [
                 {
                     model: User,
-                    as: 'Users', // Corregido aquí
+                    as: 'users',
                     attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
                 },
             ],
@@ -69,7 +69,6 @@ roleController.getById = async (req, res) => {
         });
     }
 };
-
 
 roleController.update = async (req, res) => {
     try {

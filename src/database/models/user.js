@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       User.belongsTo(models.Role, {
-        as: 'role', // alias, se genera un método especial
+        as: 'role',
         foreignKey: "role_id",
       });
     }
@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     first_name: {
       type: DataTypes.STRING,
-      allowNull: false, // Añadir restricciones según sea necesario
+      allowNull: false,
       validate: {
-        notEmpty: true, // Ejemplo de validación
+        notEmpty: true,
       }
     },
     last_name: {
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isEmail: true, // Validación de correo electrónico
+        isEmail: true,
         notEmpty: true,
       }
     },
@@ -44,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     role_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { // Relación con la tabla Role
-        model: 'Roles', // Nombre de la tabla en la base de datos
+      references: {
+        model: 'Roles',
         key: 'id',
       }
     },
