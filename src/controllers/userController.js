@@ -254,4 +254,42 @@ userController.removeUserAppointmentsFromUser = async (req, res) => {
     res.send('User Appointments Removed');
 };
 
+userController.getUserServices = async (req, res) => {
+    try {
+        const { first_name, last_name, email, password_hash, role_id } = req.body;
+        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
+        res.status(200).json({
+            success: true,
+            message: "User Service successfully",
+            data: newUser
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error creating user Service",
+            error: error.message
+        });
+    }
+    res.send('User Services');
+};
+
+userController.getServicesByUserId = async (req, res) => {
+    try {
+        const { first_name, last_name, email, password_hash, role_id } = req.body;
+        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
+        res.status(200).json({
+            success: true,
+            message: "User Service by User ID successfully",
+            data: newUser
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error creating user Service by User ID",
+            error: error.message
+        });
+    }
+    res.send('Services by User ID');
+};
+
 module.exports = userController;
