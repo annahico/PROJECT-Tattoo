@@ -22,7 +22,9 @@ appointmentController.create = async (req, res) => {
 
 appointmentController.getAll = async (req, res) => {
     try {
-        const appointments = await Appointment.findAll();
+        const appointments = await Appointment.findAll({
+            attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        });
         res.status(200).json({
             success: true,
             message: "Appointments retrieved successfully",

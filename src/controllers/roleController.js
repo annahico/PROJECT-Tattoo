@@ -21,7 +21,9 @@ roleController.create = async (req, res) => {
 
 roleController.getAll = async (req, res) => {
     try {
-        const roles = await Role.findAll();
+        const roles = await Role.findAll({
+            attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
+        });
         res.status(200).json({
             success: true,
             message: "Roles retrieved successfully",

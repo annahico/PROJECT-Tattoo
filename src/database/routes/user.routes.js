@@ -3,7 +3,7 @@ const router = express.Router();
 const ctrl = require('../../controllers/userController');
 
 
-// USER ROUTES
+// USER ROUTES  //REMEMBER poner las funciones en cotroller
 router.get("/profile", ctrl.getUserProfile);
 router.put("/profile", ctrl.updateUserProfile);
 router.get("/appointment", ctrl.getUserAppointments);

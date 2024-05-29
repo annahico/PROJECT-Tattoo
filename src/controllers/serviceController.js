@@ -22,7 +22,9 @@ serviceController.create = async (req, res) => {
 
 serviceController.getAll = async (req, res) => {
     try {
-        const services = await Service.findAll();  // Corregido 'service' por 'services'
+        const services = await Service.findAll({
+            attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        }); // Corregido 'service' por 'services'
         res.status(200).json({
             success: true,
             message: "Services retrieved successfully",
