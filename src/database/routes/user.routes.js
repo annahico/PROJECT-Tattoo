@@ -6,9 +6,9 @@ const ctrl = require('../../controllers/userController');
 // USER ROUTES
 router.get("/profile", ctrl.getUserProfile);
 router.put("/profile", ctrl.updateUserProfile);
-// router.get("/appointment", ctrl.getUserAppointments);
-// router.post("/appointment", ctrl.addAppointmentsToUser);
-// router.delete("/appointment", ctrl.removeUserAppointmentsFromUser);
+router.get("/appointment", ctrl.getUserAppointments);
+router.post("/appointment", ctrl.addAppointmentsToUser);
+router.delete("/appointment", ctrl.removeUserAppointmentsFromUser);
 // router.get("/services", ctrl.getUserServices);
 
 // USER ENDPOINTS

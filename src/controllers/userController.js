@@ -3,10 +3,7 @@ const userController = {};
 
 userController.create = async (req, res) => {
     try {
-        const users = await User.findAll({
-            attributes: { exclude: ["createdAt", "updatedAt", "password"] },
-        });
-        const { id, first_name, last_name, email, password_hash, role_id } = req.body;
+        const { first_name, last_name, email, password_hash, role_id } = req.body;
         const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
         res.status(200).json({
             success: true,
@@ -46,13 +43,12 @@ userController.getById = async (req, res) => {
     const userId = req.params.id;
 
     try {
-        const userId = req.params.id;
         const user = await User.findByPk(userId, {
             include: [
                 {
                     model: Role,
                     as: 'role',
-                    attributes: { exclude: ["createdAt", "updatedAt"] }, // Coma faltante aquí
+                    attributes: { exclude: ["createdAt", "updatedAt"] },
                 },
             ],
             attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
@@ -84,12 +80,10 @@ userController.update = async (req, res) => {
     const { password, role_id, ...restUserData } = req.body;
 
     try {
-        const userId = req.params.id;
-        const userData = req.body;
-        const [updated] = await User.update(userData, {
+        const updated = await User.update(restUserData, {
             where: { id: userId }
         });
-        if (updated) {
+        if (updated[0]) {
             const updatedUser = await User.findByPk(userId, {
                 attributes: { exclude: ["createdAt", "updatedAt", "password"] },
             });
@@ -145,7 +139,7 @@ userController.getUserProfile = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "User Profile retrieved successfully",
-            data: roles
+            data: users
         });
     } catch (error) {
         res.status(500).json({
@@ -154,18 +148,17 @@ userController.getUserProfile = async (req, res) => {
             error: error.message
         });
     }
-    res.send('User Profile');
 };
 
 userController.updateUserProfile = async (req, res) => {
     try {
         const userId = req.params.id;
         const userData = req.body;
-        const [updated] = await User.update(ruserData, {
+        const updated = await User.update(userData, {
             where: { id: userId }
         });
-        if (updated) {
-            const updatedRole = await User.findByPk(userId);
+        if (updated[0]) {
+            const updatedUser = await User.findByPk(userId);
             res.status(200).json({
                 success: true,
                 message: "User Profile updated successfully",
@@ -184,9 +177,81 @@ userController.updateUserProfile = async (req, res) => {
             error: error.message
         });
     }
-    res.send('User Profile Updated');
 };
 
+userController.getUserAppointments = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const userData = req.body;
+        const updated = await User.update(userData, {
+            where: { id: userId }
+        });
+        if (updated[0]) {
+            const updatedUser = await User.findByPk(userId);
+            res.status(200).json({
+                success: true,
+                message: "User Appointment updated successfully",
+                data: updatedUser
+            });
+        } else {
+            res.status(404).json({
+                success: false,
+                message: "User Appointment not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error updating User Appointment",
+            error: error.message
+        });
+    }
+};
 
+userController.addAppointmentsToUser = async (req, res) => {
+    try {
+        const { first_name, last_name, email, password_hash, role_id } = req.body;
+        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
+        res.status(200).json({
+            success: true,
+            message: "User Appointment created successfully",
+            data: newUser
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error creating user Appointment",
+            error: error.message
+        });
+    }
+    res.send('Appointments Added to User');
+};
+
+userController.removeUserAppointmentsFromUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const deleted = await User.destroy({
+            where: { id: userId }
+        });
+        if (deleted) {
+            res.status(200).json({
+                success: true,
+                message: "User Appointment deleted successfully"
+            });
+        } else {
+            res.status(404).json({
+                success: false,
+                message: "User Appointment not found"
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error deleting user Appointment",
+            error: error.message
+        });
+    }
+    res.send('User Appointments Removed');
+};
 
 module.exports = userController;
