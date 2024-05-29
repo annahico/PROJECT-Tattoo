@@ -23,7 +23,7 @@ serviceController.create = async (req, res) => {
 serviceController.getAll = async (req, res) => {
     try {
         const services = await Service.findAll({
-            attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
+            attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
         }); // Corregido 'service' por 'services'
         res.status(200).json({
             success: true,
@@ -47,7 +47,7 @@ serviceController.getById = async (req, res) => {
                 {
                     model: Appointment,
                     as: 'appointments',  // Alias corregido
-                    attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
+                    attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
                 },
             ],
             attributes: { exclude: ["createdAt", "updatedAt"] },
