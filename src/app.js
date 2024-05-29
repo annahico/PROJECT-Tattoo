@@ -6,6 +6,8 @@ const apiRoutes = require("./database/routes");
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+
 const PORT = process.env.PORT || 4000;
 
 // Middleware para parsear el cuerpo de las solicitudes

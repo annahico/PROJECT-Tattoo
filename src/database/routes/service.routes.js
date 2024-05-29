@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require("../../controllers/serviceController");
+const auth = require('../middlewares/auth'); 
 
 
 //PUBLIC ROUTES

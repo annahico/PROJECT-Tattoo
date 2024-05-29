@@ -1,30 +1,38 @@
 const jwt = require("jsonwebtoken");
-const { logger } = require("sequelize/lib/utils/logger");
 
 module.exports = (req, res, next) => {
-    const token = req.headers.authorization?.spit(" ")[1];
+    const authorizationHeader = req.headers.authorization;
 
-    if (!token)
+    if (!authorizationHeader) {
         return res.status(401).json({
-    success: true,
-    message: "Unauthorized",
-});
+            success: false,
+            message: "Unauthorized",
+        });
+    }
 
-try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const token = authorizationHeader.split(" ")[1];
 
-    //Modify request object to include payload
-    //req. tokenData = {
-        //userId: decoded.userId,
-        //userRoleName: decoded.userRoleName,
-    //};
+    if (!token) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized",
+        });
+    }
 
-    next();
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        // Modificar el objeto request para incluir los datos del token
+        req.tokenData = {
+            userId: decoded.userId,
+            userRoleName: decoded.userRoleName,
+        };
+
+        next();
     } catch (error) {
         res.status(401).json({
-            success: true,
+            success: false,
             message: "Invalid token provided",
         });
     }
-}
-
+};

@@ -1,21 +1,23 @@
 const express = require('express');
-const router = express.Router();
 const userController = require('../../controllers/userController');
+const auth = require('../middlewares/auth'); 
+
+const router = express.Router();
 
 // USER ROUTES
-router.get("/profile", auth, ctrl.getUserProfile);
-router.put("/profile", auth, ctrl.updateUserProfile);
-router.get('/appointment', auth, ctrl.userController.getUserAppointments);
-router.post('/appointment', auth,  ctrl.userController.addAppointmentsToUser);
-router.delete('/appointment', auth,  ctrl.userController.removeUserAppointmentsFromUser);
-router.get('/services', auth,  ctrl.userController.getUserServices);
+// router.get("/profile", auth, userController.getUserProfile);
+// router.put("/profile", auth, userController.updateUserProfile);
+// router.get('/appointment', auth, userController.getUserAppointments);
+// router.post('/appointment', auth, userController.addAppointmentsToUser);
+// router.delete('/appointment', auth, userController.removeUserAppointmentsFromUser);
+// router.get('/services', auth, userController.getUserServices);
 
 // USER ENDPOINTS
-router.post("/", auth, ctrl.userController.create);
-router.get("/", auth, ctrl.userController.getAll);
-router.get("/:id", auth,  ctrl.userController.getById);
-router.put("/:id", auth, ctrl.userController.update);
-router.delete("/:id", auth, ctrl.userController.delete);
-router.get("/:id/services",auth, ctrl.userController.getServicesByUserId);
+router.post("/", auth, userController.create);
+router.get("/", auth, userController.getAll);
+router.get("/:id", auth, userController.getById);
+router.put("/:id", auth, userController.update);
+router.delete("/:id", auth, userController.delete);
+// router.get("/:id/services", auth, userController.getServicesByUserId);
 
 module.exports = router;
