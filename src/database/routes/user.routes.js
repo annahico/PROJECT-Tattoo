@@ -11,11 +11,11 @@ router.delete('/appointment', auth,  ctrl.userController.removeUserAppointmentsF
 router.get('/services', auth,  ctrl.userController.getUserServices);
 
 // USER ENDPOINTS
-router.post("/", ctrl.userController.create);
-router.get("/", ctrl.userController.getAll);
-router.get("/:id", ctrl.userController.getById);
-router.put("/:id", ctrl.userController.update);
-router.delete("/:id", ctrl.userController.delete);
-// router.get("/:id/services", userController.getServicesByUserId);
+router.post("/", auth, ctrl.userController.create);
+router.get("/", auth, ctrl.userController.getAll);
+router.get("/:id", auth,  ctrl.userController.getById);
+router.put("/:id", auth, ctrl.userController.update);
+router.delete("/:id", auth, ctrl.userController.delete);
+router.get("/:id/services",auth, ctrl.userController.getServicesByUserId);
 
 module.exports = router;
