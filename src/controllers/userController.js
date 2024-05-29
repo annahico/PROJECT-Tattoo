@@ -24,111 +24,115 @@ userController.getAll = async (req, res) => {
         const users = await User.findAll({
             attributes: { exclude: ["createdAt", "updatedAt", "password"] },
         });
+
         res.status(200).json({
             success: true,
-            message: "Users retrieved successfully",
-            data: users
+            message: "Users retreived successfully",
+            data: users,
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error retrieving users",
-            error: error.message
+            message: "Error retreiving users",
+            error: error.message,
         });
     }
 };
-
 
 userController.getById = async (req, res) => {
     const userId = req.params.id;
 
     try {
         const user = await User.findByPk(userId, {
-            include: [
-                {
-                    model: Role,
-                    as: 'role',
-                    attributes: { exclude: ["createdAt", "updatedAt"] },
-                },
-            ],
-            attributes: { exclude: ["createdAt", "updatedAt", "role_id"] },
+            attributes: { exclude: ["createdAt", "updatedAt", "password"] },
         });
-        if (user) {
-            res.status(200).json({
+
+        if (!user) {
+            return res.status(404).json({
                 success: true,
-                message: "User retrieved successfully",
-                data: user
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "User not found"
+                message: "User not found",
             });
         }
+
+        res.status(200).json({
+            success: true,
+            message: "User retreived successfully",
+            data: user,
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error retrieving user",
-            error: error.message
+            message: "Error retreinving user",
+            error: error.message,
         });
     }
 };
-
 
 userController.update = async (req, res) => {
     const userId = req.params.id;
     const { password, role_id, ...restUserData } = req.body;
 
     try {
-        const updated = await User.update(restUserData, {
-            where: { id: userId }
-        });
-        if (updated[0]) {
-            const updatedUser = await User.findByPk(userId, {
-                attributes: { exclude: ["createdAt", "updatedAt", "password"] },
-            });
-            res.status(200).json({
+        const userToUpdate = await User.findByPk(userId);
+
+        if (!userToUpdate) {
+            return res.status(404).json({
                 success: true,
-                message: "User updated successfully",
-                data: updatedUser
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "User not found"
+                message: "User not found",
             });
         }
+
+        if (password) {
+            const hashedPassword = bcrypt.hashSync(password, 10);
+            userToUpdate.password = hashedPassword;
+        }
+
+        userToUpdate.set({
+            ...userToUpdate,
+            ...restUserData,
+        });
+
+        await userToUpdate.save();
+
+        res.status(200).json({
+            success: true,
+            message: "User updated successfully",
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error updating user",
-            error: error.message
+            error: error.message,
         });
     }
 };
 
 userController.delete = async (req, res) => {
+    const userId = req.params.id;
+
     try {
-        const userId = req.params.id;
-        const deleted = await User.destroy({
-            where: { id: userId }
+        const deleteResult = await User.destroy({
+            where: {
+                id: userId,
+            },
         });
-        if (deleted) {
-            res.status(200).json({
+
+        if (deleteResult === 0) {
+            return res.status(404).json({
                 success: true,
-                message: "User deleted successfully"
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "User not found"
+                message: "User not found",
             });
         }
+
+        res.status(200).json({
+            success: true,
+            message: "User deleted successfully",
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "Error deleting user",
-            error: error.message
+            error: error.message,
         });
     }
 };
@@ -151,30 +155,40 @@ userController.getUserProfile = async (req, res) => {
 };
 
 userController.updateUserProfile = async (req, res) => {
+    const userId = req.tokenData.userId;
+    const { password, role_id, ...restUserData } = req.body;
+
     try {
-        const userId = req.params.id;
-        const userData = req.body;
-        const updated = await User.update(userData, {
-            where: { id: userId }
-        });
-        if (updated[0]) {
-            const updatedUser = await User.findByPk(userId);
-            res.status(200).json({
+        const userToUpdate = await User.findByPk(userId);
+
+        if (!userToUpdate) {
+            return res.status(404).json({
                 success: true,
-                message: "User Profile updated successfully",
-                data: updatedUser
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "User Profile not found"
+                message: "User not found",
             });
         }
+
+        if (password) {
+            const hashedPassword = bcrypt.hashSync(password, 10);
+            userToUpdate.password = hashedPassword;
+        }
+
+        userToUpdate.set({
+            ...userToUpdate,
+            ...restUserData,
+        });
+
+        await userToUpdate.save();
+
+        res.status(200).json({
+            success: true,
+            message: "User updated successfully",
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error updating User Profile",
-            error: error.message
+            message: "Error updating user",
+            error: error.message,
         });
     }
 };
@@ -210,86 +224,148 @@ userController.getUserAppointments = async (req, res) => {
 
 userController.addAppointmentsToUser = async (req, res) => {
     try {
-        const { first_name, last_name, email, password_hash, role_id } = req.body;
-        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
-        res.status(200).json({
-            success: true,
-            message: "User Appointment created successfully",
-            data: newUser
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error creating user Appointment",
-            error: error.message
-        });
-    }
-    res.send('Appointments Added to User');
-};
+        const userId = req.tokenData.userId;
 
-userController.removeUserAppointmentsFromUser = async (req, res) => {
-    try {
-        const userId = req.params.id;
-        const deleted = await User.destroy({
-            where: { id: userId }
-        });
-        if (deleted) {
-            res.status(200).json({
+        const appointmentId = Number(req.body.appointmentId);
+        const appointmentToAdd = await Appointment.findByPk(appointmentId);
+
+        if (!appointmentToAdd) {
+            return res.status(404).json({
                 success: true,
-                message: "User Appointment deleted successfully"
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "User Appointment not found"
+                message: "Appointment not found",
             });
         }
+
+        const appointment = await appointments.findOne({
+            where: {
+                user_id: userId,
+                book_id: appointmentId,
+            },
+        });
+
+        if (appointment) {
+            return res.status(400).json({
+                success: true,
+                message: "appointment already in the list",
+            });
+        }
+
+        await FavoriteAppointment.create({
+            user_id: userId,
+            book_id: appointmentId,
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "appointment added to list",
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error deleting user Appointment",
-            error: error.message
+            message: "Error adding appointment",
+            error: error.message,
         });
     }
-    res.send('User Appointments Removed');
+};
+
+userController.removeAppointmentsFromUser = async (req, res) => {
+    try {
+        const userId = req.tokenData.userId;
+        const appointmentId = Number(req.body.appointmentId);
+
+        const appointmentToRemove = await Book.findByPk(appointmentId);
+
+        if (!appointmentToRemove) {
+            return res.status(404).json({
+                success: true,
+                message: "appointment not found",
+            });
+        }
+
+        const deleteResult = await appointment.destroy({
+            where: {
+                user_id: userId,
+                book_id: appointmentId,
+            },
+        });
+
+        if (deleteResult === 0) {
+            return res.status(404).json({
+                success: true,
+                message: "Appointment not found for user",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Appointment removed from the list",
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error removing appointment from the list",
+            error: error.message,
+        });
+    }
 };
 
 userController.getUserServices = async (req, res) => {
+    const userId = req.tokenData.userId;
+
     try {
-        const { first_name, last_name, email, password_hash, role_id } = req.body;
-        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
+        const user = await User.findByPk(userId, {
+            attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        });
+
         res.status(200).json({
             success: true,
-            message: "User Service successfully",
-            data: newUser
+            message: "User retreived successfully",
+            data: user,
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error creating user Service",
-            error: error.message
+            message: "Error retreinving user",
+            error: error.message,
         });
     }
-    res.send('User Services');
 };
+
+
 
 userController.getServicesByUserId = async (req, res) => {
     try {
-        const { first_name, last_name, email, password_hash, role_id } = req.body;
-        const newUser = await User.create({ first_name, last_name, email, password_hash, role_id });
+        const userId = req.params.id;
+        const user = await User.findByPk(userId, {
+            include: [
+                {
+                    model: Service,
+                    as: "services",
+                    attributes: { exclude: ["createdAt", "updatedAt", "user_id", "service_id"] }
+                }
+            ],
+            attributes: { exclude: ["createdAt", "updatedAt", "password"] }
+        });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Usuario no encontrado"
+            });
+        }
+
         res.status(200).json({
             success: true,
-            message: "User Service by User ID successfully",
-            data: newUser
+            message: "Servicios del usuario recuperados exitosamente",
+            data: user.services
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error creating user Service by User ID",
+            message: "Error al recuperar los servicios del usuario",
             error: error.message
         });
     }
-    res.send('Services by User ID');
 };
 
 module.exports = userController;

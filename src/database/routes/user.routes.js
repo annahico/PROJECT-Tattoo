@@ -3,12 +3,12 @@ const router = express.Router();
 const ctrl = require('../../controllers/userController');
 
 
-// USER ROUTES  //REMEMBER poner las funciones en cotroller
+// USER ROUTES  //REMEMBER poner las funciones en
 router.get("/profile", ctrl.getUserProfile);
 router.put("/profile", ctrl.updateUserProfile);
 router.get("/appointment", ctrl.getUserAppointments);
 router.post("/appointment", ctrl.addAppointmentsToUser);
-router.delete("/appointment", ctrl.removeUserAppointmentsFromUser);
+router.delete("/appointment", ctrl.removeAppointmentsFromUser);
 router.get("/services", ctrl.getUserServices);
 
 // USER ENDPOINTS
