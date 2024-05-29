@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require("../../controllers/roleController");
-const auth = require('../middlewares/auth');  //podemos quitar el rolecontroller porque es un fichero exclusivo para role
+ //podemos quitar el rolecontroller porque es un fichero exclusivo para role
 
 // ROLE ENDPOINTS
 router.post("/",ctrl.create); //se quita la ruta role porque ya lo hereda de index

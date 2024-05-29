@@ -11,8 +11,8 @@ app.use(express.json());
 const PORT = process.env.PORT || 4000;
 
 // Middleware para parsear el cuerpo de las solicitudes
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/healthy', (req, res) => {
     res.status(200).json({

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require("../../controllers/appointmentController");
-const auth = require('../middlewares/auth'); 
+
 
 // APPOINTMENT END POINT
 router.post("/", ctrl.create);

@@ -1,16 +1,15 @@
 const express = require('express');
-const ctrl = require('../../controllers/userController');
-const auth = require('../middlewares/auth'); 
-
 const router = express.Router();
+const ctrl = require('../../controllers/userController');
+
 
 // USER ROUTES
-// router.get("/profile", ctrl.getUserProfile);
-// router.put("/profile", ctrl.updateUserProfile);
-// router.get('/appointment', ctrl.getUserAppointments);
-// router.post('/appointment', ctrl.addAppointmentsToUser);
-// router.delete('/appointment', ctrl.removeUserAppointmentsFromUser);
-// router.get('/services', ctrl.getUserServices);
+router.get("/profile", ctrl.getUserProfile);
+router.put("/profile", ctrl.updateUserProfile);
+// router.get("/appointment", ctrl.getUserAppointments);
+// router.post("/appointment", ctrl.addAppointmentsToUser);
+// router.delete("/appointment", ctrl.removeUserAppointmentsFromUser);
+// router.get("/services", ctrl.getUserServices);
 
 // USER ENDPOINTS
 router.post("/", ctrl.create);
