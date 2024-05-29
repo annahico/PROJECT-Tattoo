@@ -4,11 +4,11 @@ const ctrl = require("../../controllers/appointmentController");
 const auth = require('../middlewares/auth'); 
 
 // APPOINTMENT END POINT
-router.post("/", auth, ctrl.create);
-router.get("/", auth, ctrl.getAll);
-router.get("/:id", auth, ctrl.getById);
-router.put("/:id", auth, ctrl.update);
-router.delete("/:id", auth, ctrl.delete);
+router.post("/", ctrl.create);
+router.get("/", ctrl.getAll);
+router.get("/:id", ctrl.getById);
+router.put("/:id", ctrl.update);
+router.delete("/:id", ctrl.delete);
 
 
 module.exports = router;
