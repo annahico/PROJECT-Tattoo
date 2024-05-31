@@ -6,27 +6,38 @@ const authController = {};
 
 authController.register = async (req, res) => {
     try {
-        const { first_name, email, password } = req.body;
+        const { first_name, last_name, email, password } = req.body;
 
-        if (!first_name || !email || !password) {
+        if (!first_name || !last_name || !email || !password) {
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: "Invalid registration fields",
             });
         }
 
-        const hashedPassword = bcrypt.hashSync(password, 10);
+        const existingUser = await User.findOne({ where: { email } });
 
-        await User.create({
+        if (existingUser) {
+            return res.status(400).json({
+                success: false,
+                message: "User already exists",
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await User.create({
             first_name,
+            last_name,
             email,
-            password: hashedPassword,
-            role_id: 3, // user role
+            password_hash: hashedPassword,
+            role_id: 4, // user role
         });
 
         res.status(200).json({
             success: true,
-            message: `User registered successfully`,
+            message: "User registered successfully",
+            data: { userId: user.id },
         });
     } catch (error) {
         res.status(500).json({
@@ -41,11 +52,10 @@ authController.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Validate email and password
         if (!email || !password) {
             return res.status(400).json({
-                success: true,
-                message: "email and password are required",
+                success: false,
+                message: "Email and password are required",
             });
         }
 
@@ -60,17 +70,19 @@ authController.login = async (req, res) => {
         });
 
         if (!user) {
-            return res
-                .status(400)
-                .json({ success: true, message: "Bad credentials" });
+            return res.status(400).json({
+                success: false,
+                message: "Bad credentials",
+            });
         }
 
-        const isPasswordValid = bcrypt.compareSync(password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
         if (!isPasswordValid) {
-            return res
-                .status(400)
-                .json({ success: true, message: "Bad credentials" });
+            return res.status(400).json({
+                success: false,
+                message: "Bad credentials",
+            });
         }
 
         const tokenPayload = {
