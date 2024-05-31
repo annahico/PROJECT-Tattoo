@@ -12,4 +12,4 @@ router.use("/users", userRoutes);
 router.use("/services", serviceRoutes);
 router.use("/appointments", appointmentRoutes);
 
-module.exports = router;
+module.exports = router; 
