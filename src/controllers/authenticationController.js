@@ -123,6 +123,12 @@ authController.login = async (req, res) => {
 
         // Find user by email
         const user = await User.findOne({
+            include: [
+                {
+                    model: Role,
+                    as: "role",
+                },
+            ],
             where: { email },
         });
 
@@ -133,7 +139,6 @@ authController.login = async (req, res) => {
             });
         }
 
-
         // Validate password
         const isPasswordValid = await bcrypt.compare(password, user.password_hash);
         if (!isPasswordValid) {
@@ -143,7 +148,27 @@ authController.login = async (req, res) => {
             });
         }
 
-      
+        // Create JWT token
+        const tokenPayload = {
+            userId: user.id,
+            userRoleName: user.role.name,
+        };
+        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY, {
+            expiresIn: "3h",
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Login failed",
+            error: error.message,
+        });
+    }
 };
 
 module.exports = authController;
