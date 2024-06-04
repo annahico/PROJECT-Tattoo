@@ -109,3 +109,7 @@ npx sequelize-cli db:migrate
 ```sh
 npx sequelize-cli db:migrate:undo
 ```
+
+```sh
+npx sequelize-cli db:migrate:undo:all
+```
