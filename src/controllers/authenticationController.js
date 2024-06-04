@@ -111,8 +111,16 @@ authController.login = async (req, res) => {
 
 authController.login = async (req, res) => {
     try {
-
         const { email, password } = req.body;
+
+        // Validate email and password
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required",
+            });
+        }
+
 
     } catch (error) {
         res.status(500).json({
@@ -122,5 +130,6 @@ authController.login = async (req, res) => {
         });
     }
 };
+
 
 module.exports = authController;
