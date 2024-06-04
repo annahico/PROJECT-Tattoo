@@ -121,15 +121,21 @@ authController.login = async (req, res) => {
             });
         }
 
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Login failed",
-            error: error.message,
+        // Find user by email
+        const user = await User.findOne({
+            where: { email },
         });
-    }
-};
 
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Bad credentials", //asi no damos información detallada de la base de datos
+            });
+        }
+
+      
+
+}
+};
 
 module.exports = authController;
