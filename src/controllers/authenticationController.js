@@ -133,9 +133,17 @@ authController.login = async (req, res) => {
             });
         }
 
-      
 
-}
+        // Validate password
+        const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+        if (!isPasswordValid) {
+            return res.status(400).json({
+                success: false,
+                message: "Bad credentials",
+            });
+        }
+
+      
 };
 
 module.exports = authController;
