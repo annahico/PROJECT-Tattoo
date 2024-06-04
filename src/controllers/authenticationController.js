@@ -108,4 +108,19 @@ authController.login = async (req, res) => {
     }
 };
 
+
+authController.login = async (req, res) => {
+    try {
+
+        const { email, password } = req.body;
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Login failed",
+            error: error.message,
+        });
+    }
+};
+
 module.exports = authController;
