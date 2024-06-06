@@ -151,16 +151,16 @@ authController.login = async (req, res) => {
         // Create JWT token
         const tokenPayload = {
             userId: user.id,
-            userRoleName: user.role,
+            userRoleName: user.role.name,
         };
-        // const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY, {
-        //     expiresIn: "3h",
-        // });
+        const token = jwt.sign(tokenPayload, "1234", {
+            expiresIn: "3h",
+        });
 
         res.status(200).json({
             success: true,
             message: "Login successful",
-            token: tokenPayload,
+            token,
         });
     } catch (error) {
         res.status(500).json({
