@@ -10,16 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       first_name: {
-        type: Sequelize.STRING // Cambiado de 'name' a 'first_name'
+        type: Sequelize.STRING, // Cambiado de 'name' a 'first_name'
+        allowNull: false
       },
       last_name: {
-        type: Sequelize.STRING // Cambiado de 'name' a 'last_name'
+        type: Sequelize.STRING, // Cambiado de 'name' a 'last_name'
+        allowNull: false
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       password_hash: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       role_id: {
         type: Sequelize.INTEGER,
