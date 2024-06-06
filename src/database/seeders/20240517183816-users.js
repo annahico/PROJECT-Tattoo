@@ -7,9 +7,9 @@ module.exports = {
     await queryInterface.bulkInsert('Users',
       [
         {
-          first_name: 'Galdalf',
+          first_name: 'Gandalf',
           last_name: 'The White',
-          email: 'gandalf@example.es',
+          email: 'admin@example.es',
           password_hash: '123456',
           role_id: 1,
           createdAt: new Date(),
