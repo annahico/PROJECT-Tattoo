@@ -1,7 +1,9 @@
+// src/routes/user.routes.js
+
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../../controllers/userController');
-const auth = require("../../middlewares/auth");  // Ensure this path is correct
+const auth = require("../../middlewares/auth");  
 const authorize = require("../../middlewares/authorize");
 
 // USER ROUTES

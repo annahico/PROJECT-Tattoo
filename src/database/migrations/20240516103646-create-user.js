@@ -10,11 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       first_name: {
-        type: Sequelize.STRING, // Cambiado de 'name' a 'first_name'
+        type: Sequelize.STRING,
         allowNull: false
       },
       last_name: {
-        type: Sequelize.STRING, // Cambiado de 'name' a 'last_name'
+        type: Sequelize.STRING,
         allowNull: false
       },
       email: {
@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      password: {
+      password_hash: {  // Asegúrate de que este campo existe
         type: Sequelize.STRING,
         allowNull: false
       },

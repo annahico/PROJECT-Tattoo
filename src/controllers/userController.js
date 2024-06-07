@@ -1,4 +1,8 @@
 const { User, Role } = require("../database/models");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+// Definir el objeto userController
 const userController = {};
 
 userController.create = async (req, res) => {
