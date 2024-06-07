@@ -10,7 +10,7 @@ module.exports = {
           first_name: 'Gandalf',
           last_name: 'The White',
           email: 'admin@example.es',
-          password_hash: '123456',
+          password_hash: '123456',//esto es un string NO un HASH
           role_id: 1,
           createdAt: new Date(),
           updatedAt: new Date()

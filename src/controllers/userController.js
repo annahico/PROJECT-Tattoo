@@ -331,8 +331,6 @@ userController.getUserServices = async (req, res) => {
     }
 };
 
-
-
 userController.getServicesByUserId = async (req, res) => {
     try {
         const userId = req.params.id;
