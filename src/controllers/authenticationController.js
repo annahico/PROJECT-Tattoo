@@ -71,16 +71,16 @@ authController.login = async (req, res) => {
 
         if (!user) {
             return res.status(400).json({
-                success: false,
+                success: true,
                 message: "Bad credentials",
             });
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+        const isPasswordValid = bcrypt.compareSync(password, user.password);
 
         if (!isPasswordValid) {
             return res.status(400).json({
-                success: false,
+                success: true,
                 message: "Bad credentials",
             });
         }
@@ -90,69 +90,6 @@ authController.login = async (req, res) => {
             userRoleName: user.role.name,
         };
 
-        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY, {
-            expiresIn: "3h",
-        });
-
-        res.status(200).json({
-            success: true,
-            message: "Login successful",
-            token,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Login failed",
-            error: error.message,
-        });
-    }
-};
-
-
-authController.login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        // Validate email and password
-        if (!email || !password) {
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required",
-            });
-        }
-
-        // Find user by email
-        const user = await User.findOne({
-            include: [
-                {
-                    model: Role,
-                    as: "role",
-                },
-            ],
-            where: { email },
-        });
-
-        if (!user) {
-            return res.status(400).json({
-                success: false,
-                message: "Bad credentials", //asi no damos información detallada de la base de datos
-            });
-        }
-
-        // Validate password
-        const isPasswordValid = await bcrypt.compare(password, user.password_hash);
-        if (!isPasswordValid) {
-            return res.status(400).json({
-                success: false,
-                message: "Bad credentials",
-            });
-        }
-
-        // Create JWT token
-        const tokenPayload = {
-            userId: user.id,
-            userRoleName: user.role.name,
-        };
         const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY, {
             expiresIn: "3h",
         });

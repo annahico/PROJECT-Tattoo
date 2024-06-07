@@ -1,4 +1,3 @@
-'use strict';
 const { Model } = require('sequelize');
 const sequelize = require('../../database/db');
 
@@ -36,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password_hash: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, // Asegúrate de incluir esta línea para la columna password_hash
       allowNull: false,
       validate: {
         notEmpty: true,
