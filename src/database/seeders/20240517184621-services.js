@@ -7,8 +7,14 @@ module.exports = {
     await queryInterface.bulkInsert('Services', 
     [
       {
-        service_name: 'Tattoo',
-        description: 'Umbrella Tattoo',
+        service_name: 'Tattoo 1',
+        description: 'banner of Rohan',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_name: 'Tattoo 2',
+        description: 'banner of Gondor',
         createdAt: new Date(),
         updatedAt: new Date()
       },

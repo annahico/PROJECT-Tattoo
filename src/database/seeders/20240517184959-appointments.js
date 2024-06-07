@@ -13,6 +13,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          appointment_date: new Date('2024-05-29T11:14:57'),
+          user_id: 2,
+          service_id: 2,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ],
       {}
     );
