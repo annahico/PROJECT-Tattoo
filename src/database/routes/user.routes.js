@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../../controllers/userController');
-const auth = require("../../middlewares/auth");  
+const auth = require("../../middlewares/auth");
 const authorize = require("../../middlewares/authorize");
 
 // USER ROUTES
@@ -15,8 +15,8 @@ router.delete("/appointment", auth, ctrl.removeAppointmentsFromUser);
 router.get("/services", auth, ctrl.getUserServices);
 
 // USER ENDPOINTS
+router.get("/", auth, authorize("admin", "manager", "otro"), ctrl.getAll);
 router.post("/", auth, authorize("admin"), ctrl.create);
-router.get("/", auth, authorize("admin"), ctrl.getAll);
 router.get("/:id", auth, authorize("admin"), ctrl.getById);
 router.put("/:id", auth, authorize("admin"), ctrl.update);
 router.delete("/:id", auth, authorize("admin"), ctrl.delete);
