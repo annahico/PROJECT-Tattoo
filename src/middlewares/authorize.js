@@ -5,7 +5,7 @@ module.exports = (...allowedRoles) => {
         // Roles that always have access
         const adminGroupRoles = ["Owner"];
 
-        // Access if user belongs to admin group
+        // Access if user belongs to owner group
         if (adminGroupRoles.includes(userRoleName)) {
             return next();
         }
