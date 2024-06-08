@@ -31,7 +31,7 @@ authController.register = async (req, res) => {
             last_name,
             email,
             password_hash: hashedPassword,
-            role_id: 3, // user role
+            role_id: 4, // user role
         });
 
         res.status(200).json({
@@ -52,6 +52,7 @@ authController.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        // Validate email and password
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
