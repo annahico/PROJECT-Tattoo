@@ -11,7 +11,7 @@ authController.register = async (req, res) => {
         if (!first_name || !last_name || !email || !password) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid registration fields",
+                message: "All fields are required",
             });
         }
 
@@ -24,14 +24,14 @@ authController.register = async (req, res) => {
             });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = bcrypt.hashSync(password, 10);
 
         const user = await User.create({
             first_name,
             last_name,
             email,
             password_hash: hashedPassword,
-            role_id: 4, // user role
+            role_id: 3, // user role
         });
 
         res.status(200).json({
@@ -71,16 +71,16 @@ authController.login = async (req, res) => {
 
         if (!user) {
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: "Bad credentials",
             });
         }
 
-        const isPasswordValid = bcrypt.compareSync(password, user.password);
+        const isPasswordValid = bcrypt.compareSync(password, user.password_hash);
 
         if (!isPasswordValid) {
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: "Bad credentials",
             });
         }
