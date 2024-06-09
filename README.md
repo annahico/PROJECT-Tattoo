@@ -1,5 +1,5 @@
 # REST API: TATTOO STUDIO (backend project)
-<img src="./img/logo.gif" width="1000"  alt="Tattoo Studio"/>
+<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000"  alt="Tattoo Studio"/>
 
 
 ## Table of Contents :file_folder:
