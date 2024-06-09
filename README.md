@@ -1,18 +1,18 @@
 # REST API: TATTOO STUDIO (backend project)
-<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000"  alt="Tattoo Studio">/>
+<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000"  alt="Tattoo Studio"/>
 
 
 ## Table of Contents :file_folder:
 
-1. [Description](#description)
-2. [Stack](#stack)
+1. [Description](#description) :classical_building:
+2. [Stack](#stack) :gear:
 3. [Features](#features)
 4. [Endpoints](#enpoints)
-5. [DataBase](#database)
+5. [DataBase](#database) :open_book:
 6. [Installation](#installation)
 7. [Implementation](#implementation)
-8. [Link](#link)
-9. [Developer](#developer)
+8. [Link](#link) :dart:
+9. [Developer](#developer) :wave:
 
   ## Description
 
@@ -112,7 +112,7 @@ https://github.com/annahico/PROJECT-Tattoo
 
 
 ***
-## Author :wave:
+## <a id="developer">Developer</a> :wave:
 
 - **Anna Hidalgo Costa**
 - [GitHub](https://github.com/annahico) - [LinkedIn](https://www.linkedin.com/in/annahico/)
