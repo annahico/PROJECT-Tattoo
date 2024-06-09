@@ -14,18 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         as: "service",
         foreignKey: "service_id",
       });
-
-      Appointment.belongsTo(models.User, {
-        as: "tattooArtist",  // Changed alias to be unique
-        foreignKey: "tattoo_artist_id",
-      });
     }
   }
   Appointment.init({
     appointment_date: DataTypes.DATE,
     user_id: DataTypes.INTEGER,
     service_id: DataTypes.INTEGER,
-    tattoo_artist_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Appointment',

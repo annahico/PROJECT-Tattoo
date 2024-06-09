@@ -6,11 +6,10 @@ const apiRoutes = require("./database/routes");
 dotenv.config();
 
 const app = express();
+
 const PORT = process.env.PORT || 4000;
 
-// Middleware para parsear el cuerpo de las solicitudes
-app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // Middleware to parse JSON requests
 
 app.get('/api/healthy', (req, res) => {
     res.status(200).json({
@@ -19,14 +18,14 @@ app.get('/api/healthy', (req, res) => {
     });
 });
 
-app.use('/api', apiRoutes); //register API routes
+app.use('/api', apiRoutes); // Register API routes
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port: ${PORT}`);
+    console.log(`🚀 Server listening on port: ${PORT}`);
 });
 
 sequelize.authenticate().then(() => {
-    console.log('Database authenticated');
+    console.log('🛢️ Database authenticated');
 }).catch((error) => {
     console.error('Error authenticating database:', error);
 });
