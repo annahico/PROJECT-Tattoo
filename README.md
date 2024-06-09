@@ -1,19 +1,22 @@
 # REST API: TATTOO STUDIO (backend project)
-<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000" />
+<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000"  alt="Tattoo Studio">/>
 
-## Description
+
+## Table of Contents :file_folder:
+
+1. [Description](#description)
+2. [Stack](#stack)
+3. [Features](#features)
+4. [Endpoints](#enpoints)
+5. [DataBase](#database)
+6. [Installation](#installation)
+7. [Implementation](#implementation)
+8. [Link](#link)
+9. [Developer](#developer)
+
+  ## Description
 
 The project consists of developing a REST API for managing appointments in a tattoo studio. The API will allow users to perform operations such as creating, listing, updating and deleting services, managing users and appointments.
-
-## Content 🗂️
-
-- [Stack](#stack)
-- [Features](#features)
-- [Endpoints](#enpoints)
-- [DataBase](#database)
-- [Install](#install)
-- [Implementation](#implementation)
-- [Developer](#developer)
 
 ## <a id="stack">Stack</a>
 - ORM: ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
@@ -68,10 +71,10 @@ The project consists of developing a REST API for managing appointments in a tat
 | PUT    | `/api/services/:id` | Update my appointment    | Super Admin |
 | GET    | `/api/services/:id` |Retrieve appointment      | Super Admin |
 
-## <a id="database">DataBase</a>
+## <a id="database">DataBase</a> :open_book:
 ![Database](./img/Database.png)
 
-## <a id="install">Install </a>
+## <a id="installation">Installation </a>
 
 In order to use this project, follow the following steps:
 - Open your terminal or command line and run the following command to clone the repository from GitHub
@@ -103,7 +106,7 @@ In order to use this project, follow the following steps:
 ```
 - Now in Postman you can consult each of the endpoints.
 - 
-## <a id="developer">Developer</a> :dart:
+## <a id="link">link</a> :dart:
 
 https://github.com/annahico/PROJECT-Tattoo
 
