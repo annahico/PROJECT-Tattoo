@@ -1,5 +1,5 @@
 # REST API: TATTOO STUDIO (backend project)
-<img src="./img/logo.gif" width="1000"  alt="Tattoo Studio"/>
+<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000"  alt="Tattoo Studio"/>
 
 
 ## Table of Contents :file_folder:
@@ -14,23 +14,23 @@
 8. [Link](#link) :dart:
 9. [Developer](#developer) :wave:
 
-  ## Description
+  ## 1. <a id="description">Description</a>
 
 The project consists of developing a REST API for managing appointments in a tattoo studio. The API will allow users to perform operations such as creating, listing, updating and deleting services, managing users and appointments.
 
-## <a id="stack">Stack</a>
+## 2. <a id="stack">Stack</a>
 - ORM: ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
 - Language: ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 - Framework: ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
-## <a id="features">Features</a>
+## 3. <a id="features">Features</a>
 
 - User Registration and Login
 - User Management
 - Service Management
 - Appointment Management
 
-## <a id="enpoints">Endpoints</a>
+## 4. <a id="enpoints">Endpoints</a>
 
 ### Authentication
 
@@ -71,10 +71,10 @@ The project consists of developing a REST API for managing appointments in a tat
 | PUT    | `/api/services/:id` | Update my appointment    | Super Admin |
 | GET    | `/api/services/:id` | Retrieve appointment     | Super Admin |
 
-## <a id="database">DataBase</a> :open_book:
-<img src="./img/database.pngf" width="1000"  alt="Tattoo Studio"/>
+## 5. <a id="database">DataBase</a> :open_book:
+<img src="./img/database.png"  alt="DataBase"/>
 
-## <a id="installation">Installation </a>
+## 6. <a id="installation">Installation </a>
 
 In order to use this project, follow the following steps:
 - Open your terminal or command line and run the following command to clone the repository from GitHub
@@ -88,7 +88,7 @@ In order to use this project, follow the following steps:
     npm install
 ```
 
-## <a id="implementation">Implementation </a>
+## 7. <a id="implementation">Implementation </a>
 - Create a .env file and copy what is in .env.example, but based on the information from your local database instance.
 - Place the credentials and name of the database in the config file.
 - Create Database
@@ -106,12 +106,11 @@ In order to use this project, follow the following steps:
 ```
 - Now in Postman you can consult each of the endpoints.
 - 
-## <a id="link">Link</a> :dart:
+## 8. <a id="link">Link</a> :dart:
 
 https://github.com/annahico/PROJECT-Tattoo
 
-
-## <a id="developer">Developer</a> :wave:
+## 9. <a id="developer">Developer</a> :wave:
 
 - **Anna Hidalgo Costa**
 - [GitHub](https://github.com/annahico) - [LinkedIn](https://www.linkedin.com/in/annahico/)
