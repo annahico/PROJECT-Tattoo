@@ -349,7 +349,7 @@ userController.delete = async (req, res) => {
     const userId = req.params.id;
 
     try {
-        const deleteResult = await User.destroy({
+        const deleteResult = await User.delete({
             where: {
                 id: userId,
             },
