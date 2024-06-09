@@ -1,117 +1,117 @@
-<h1>NOT FINISHED</h1>
+# REST API for Appointment Management in a Tattoo Studio
+<img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000" />
 
-### INICIALIZAR PROYECTO NODE
+## Description
+
+The project consists of developing a RESTful API for managing appointments in a tattoo studio. The API will allow users to perform operations such as creating, listing, updating and deleting services, managing users and appointments.
+
+## Content 🗂️
+
+- [Stack](#stack)
+- [Features](#features)
+- [Endpoints](#enpoints)
+- [DataBase](#database)
+- [Install](#install)
+- [Implementation](#implementation)
+- [Developer](#developer)
+
+## <a id="stack">Stack</a>
+- ORM: ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+- Language: ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+- Framework: ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
+## <a id="features">Features</a>
+
+- User Registration and Login
+- User Management
+- Service Management
+- Appointment Management
+
+## <a id="enpoints">Endpoints</a>
+
+### Authentication
+
+| Method | URI                           | Action                |
+|--------|-------------------------------|------------------------|
+| POST   | `/api/auth/register`          | Registro de usuarios   |
+| POST   | `/api/auth/login`             | Login de usuarios      |
+
+### Users
+
+| Method | URI                                    | Action                       | Rol         |
+|--------|----------------------------------------|------------------------------|-------------|
+| GET    | `/api/users`                           | Ver todos los usuarios       | Super Admin |
+| GET    | `/api/users/profile`                   | Ver perfil de usuario        |             |
+| PUT    | `/api/users/profile`                   | Modificar datos del perfil   |             |
+| GET    | `/api/users?email=ejemplo@ejemplo.com` | Filtrar usuario por email    | Super Admin |
+| DELETE | `/api/users/:id`                       | Eliminar usuario             | Super Admin |
+| PUT    | `/api/users/:id/role`                  | Cambio de role               | Super Admin |
+| GET    | `/api/users/tattoo_artist`             | Listara Todos los tatuadores | Super Admin |
+
+
+### Appointments
+
+| Method | URI                     | Action                | Rol  |
+|--------|-------------------------|-----------------------|------|
+| POST   | `/api/appointments`     | Crear cita            |      |
+| PUT    | `/api/appointments`     | Actualizar mi cita    |      |
+| GET    | `/api/appointments/:id` | Recuperar cita        |      |
+| GET    | `/api/appointments`     | Ver mis propias citas |      |
+
+
+### Services
+
+| Method | URI                 | Action               | Rol         |
+|--------|---------------------|-----------------------|-------------|
+| GET    | `/api/services`     | Ver mis propias citas |             |
+| POST   | `/api/services`     | Crear cita            | Super Admin |
+| PUT    | `/api/services/:id` | Actualizar mi cita    | Super Admin |
+| GET    | `/api/services/:id` | Recuperar cita        | Super Admin |
+
+## <a id="database">DataBase</a>
+![Database](./img/Database.png)
+
+## <a id="install">Install </a>
+
+In order to use this project, follow the following steps:
+- Open your terminal or command line and run the following command to clone the repository from GitHub
 ```sh
-npm init
+    git clone https://github.com/annahico/PROJECT-Tattoo.git
 ```
-
+- Once the repository is cloned, access the project directory.
+- Open the project folder in your favorite text editor or IDE and open the terminal
+- Run the following command to install the project and all required packages.
 ```sh
-npm install express
+    npm install
 ```
 
+## <a id="implementation">Implementation </a>
+- Create a .env file and copy what is in .env.example, but based on the information from your local database instance.
+- Place the credentials and name of the database in the config file.
+- Create Database
+- Run migrations
 ```sh
-npm install nodemon -D
+    npm run migrate
 ```
-
+- Run Seeders
 ```sh
-npm install dotenv
+    npm run seed
 ```
-
-1. Creamos archivo .gitignore
-```git
-/node_modules
-
-.env
-```
-2. Creamos archivos .env y .env-example
-
-3. Crear carpeta /src en la raiz
-```env
-PORT=4000
-```
-
-4. Creamos dentro de la carpeta /src un fichero app.js
-
-```js
-const express = require('express')
-// require('dotenev').config()
-const dotenv = require('dotenv')
-dotenv.config();
-
-const app = express()
-
-const PORT = process.env.PORT || 4000
-
-app.get('/api/healthy', (req, res) => {
-  res.status(200).json(
-    {
-      success: true,
-      message: "My APP server is healthy" 
-    }
-  )
-})
-
-app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
-})
-```
-
-5. creamos el script dev en el package.json
-```json
-"dev": "nodemon ./src/app.js",
-```
-
-6. Comprobamos que funciona el servidor con el comando:
+- Run Project
 ```sh
-npm run dev
+    npm run dev
 ```
+- Now in Postman you can consult each of the endpoints.
+## <a id="developer">Developer</a>
 
+## Link :dart:
 
-### Sequelize installation
-```sh
-npm install --save sequelize
-```
-```sh
-npm install --save mysql2
-```
-```sh
-npm install --save-dev sequelize-cli
-```
+https://github.com/annahico/PROJECT-Tatoo
+.git
 
-1. Creamos el fichero .sequelizerc
-```js
-require('dotenv').config(); 
-const path = require("path");
+***
+## Author :wave:
 
-module.exports = {
-   config: path.resolve("./src/config", "config.json"),
-   "models-path": path.resolve("./src/models"),
-   "seeders-path": path.resolve("./src/database/seeders"),
-   "migrations-path": path.resolve("./src/database/migrations"),
-};
-```
-2. Añadimos variables de entorno al .env y .env example
-```env
-NODE_ENV=development
-DATABASE_URL=mysql://root:1234@localhost:3307
-```
+- **Anna Hidalgo Costa**
+- [GitHub](https://github.com/annahico) - [LinkedIn](https://www.linkedin.com/in/annahico/)
 
-```sh
-npx sequelize-cli init
-```
-
-```sh
-npx sequelize-cli model:generate --name Role --attributes name:string
-```
-
-```sh
-npx sequelize-cli db:migrate
-```
-
-```sh
-npx sequelize-cli db:migrate:undo
-```
-
-```sh
-npx sequelize-cli db:migrate:undo:all
-```
