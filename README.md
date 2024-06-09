@@ -69,7 +69,7 @@ The project consists of developing a REST API for managing appointments in a tat
 | GET    | `/api/services`     | View my own appointments |             |
 | POST   | `/api/services`     | Create appointment       | Super Admin |
 | PUT    | `/api/services/:id` | Update my appointment    | Super Admin |
-| GET    | `/api/services/:id` |Retrieve appointment      | Super Admin |
+| GET    | `/api/services/:id` | Retrieve appointment     | Super Admin |
 
 ## <a id="database">DataBase</a> :open_book:
 <img src="./img/database.pngf" width="1000"  alt="Tattoo Studio"/>
