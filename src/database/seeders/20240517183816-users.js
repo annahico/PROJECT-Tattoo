@@ -7,7 +7,7 @@ const plainPassword = "12345678";
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "users",
+      "Users",
       [
         {
           first_name: 'Gandalf',
@@ -38,7 +38,7 @@ module.exports = {
         },
         {
           first_name: 'Gimli',
-          last_name: 'son of Glóin',
+          last_name: 'son of Glöin',
           email: 'gimli@example.es',
           password_hash: bcrypt.hashSync(plainPassword, 10),
           role_id: 3,
@@ -60,6 +60,12 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
     await queryInterface.bulkDelete('Users', null, {});
   }
 };
