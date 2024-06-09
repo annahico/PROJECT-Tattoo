@@ -106,8 +106,8 @@ In order to use this project, follow the following steps:
 
 ## Link :dart:
 
-https://github.com/annahico/PROJECT-Tatoo
-.git
+https://github.com/annahico/PROJECT-Tattoo
+
 
 ***
 ## Author :wave:
