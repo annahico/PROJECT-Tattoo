@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # REST API: TATTOO STUDIO (backend project)
 <img src="./img/logo.gif" width="1000"  alt="Tattoo Studio"/>
 
@@ -73,7 +72,7 @@ The project consists of developing a REST API for managing appointments in a tat
 | GET    | `/api/services/:id` | Retrieve appointment     | Super Admin |
 
 ## <a id="database">DataBase</a> :open_book:
-<img src="./img/database.pngf" width="1000"  alt="Tattoo Studio"/>
+<img src="./img/database.png" width="1000"  alt="Tattoo Studio"/>
 
 ## <a id="installation">Installation </a>
 
