@@ -31,42 +31,42 @@ The project consists of developing a REST API for managing appointments in a tat
 
 ### Authentication
 
-| Method | URI                           | Action                |
+| Method | URI                           | Action                 |
 |--------|-------------------------------|------------------------|
-| POST   | `/api/auth/register`          | Registro de usuarios   |
-| POST   | `/api/auth/login`             | Login de usuarios      |
+| POST   | `/api/auth/register`          | User Registration      |
+| POST   | `/api/auth/login`             | User login             |
 
 ### Users
 
 | Method | URI                                    | Action                       | Rol         |
 |--------|----------------------------------------|------------------------------|-------------|
-| GET    | `/api/users`                           | Ver todos los usuarios       | Super Admin |
-| GET    | `/api/users/profile`                   | Ver perfil de usuario        |             |
-| PUT    | `/api/users/profile`                   | Modificar datos del perfil   |             |
-| GET    | `/api/users?email=ejemplo@ejemplo.com` | Filtrar usuario por email    | Super Admin |
-| DELETE | `/api/users/:id`                       | Eliminar usuario             | Super Admin |
-| PUT    | `/api/users/:id/role`                  | Cambio de role               | Super Admin |
-| GET    | `/api/users/tattoo_artist`             | Listara Todos los tatuadores | Super Admin |
+| GET    | `/api/users`                           | View all users               | Super Admin |
+| GET    | `/api/users/profile`                   | View user profile            |             |
+| PUT    | `/api/users/profile`                   | Modify profile information   |             |
+| GET    | `/api/users?email=example@example.com` | Filter user by email         | Super Admin |
+| DELETE | `/api/users/:id`                       | Delete user                  | Super Admin |
+| PUT    | `/api/users/:id/role`                  | Role change                  | Super Admin |
+| GET    | `/api/users/tattoo_artist`             | List all tattoo artists      | Super Admin |
 
 
 ### Appointments
 
-| Method | URI                     | Action                | Rol  |
-|--------|-------------------------|-----------------------|------|
-| POST   | `/api/appointments`     | Crear cita            |      |
-| PUT    | `/api/appointments`     | Actualizar mi cita    |      |
-| GET    | `/api/appointments/:id` | Recuperar cita        |      |
-| GET    | `/api/appointments`     | Ver mis propias citas |      |
+| Method | URI                     | Action                   | Rol  |
+|--------|-------------------------|--------------------------|------|
+| POST   | `/api/appointments`     | Create appointment       |      |
+| PUT    | `/api/appointments`     | Update my appointment    |      |
+| GET    | `/api/appointments/:id` | Retrieve appointment     |      |
+| GET    | `/api/appointments`     | View my own appointments |      |
 
 
 ### Services
 
-| Method | URI                 | Action               | Rol         |
-|--------|---------------------|-----------------------|-------------|
-| GET    | `/api/services`     | Ver mis propias citas |             |
-| POST   | `/api/services`     | Crear cita            | Super Admin |
-| PUT    | `/api/services/:id` | Actualizar mi cita    | Super Admin |
-| GET    | `/api/services/:id` | Recuperar cita        | Super Admin |
+| Method | URI                 | Action                   | Rol         |
+|--------|---------------------|--------------------------|-------------|
+| GET    | `/api/services`     | View my own appointments |             |
+| POST   | `/api/services`     | Create appointment       | Super Admin |
+| PUT    | `/api/services/:id` | Update my appointment    | Super Admin |
+| GET    | `/api/services/:id` |Retrieve appointment      | Super Admin |
 
 ## <a id="database">DataBase</a>
 ![Database](./img/Database.png)
