@@ -3,7 +3,7 @@
 
 ## Description
 
-The project consists of developing a RESTful API for managing appointments in a tattoo studio. The API will allow users to perform operations such as creating, listing, updating and deleting services, managing users and appointments.
+The project consists of developing a REST API for managing appointments in a tattoo studio. The API will allow users to perform operations such as creating, listing, updating and deleting services, managing users and appointments.
 
 ## Content 🗂️
 
