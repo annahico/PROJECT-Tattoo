@@ -39,40 +39,6 @@ serviceController.getAll = async (req, res) => {
     }
 };
 
-serviceController.getById = async (req, res) => {
-    try {
-        const serviceId = req.params.id;
-        const service = await Service.findByPk(serviceId, {
-            include: [
-                {
-                    model: Appointment,
-                    as: 'appointments',  // Alias corregido
-                    attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
-                },
-            ],
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-        });
-        if (service) {
-            res.status(200).json({
-                success: true,
-                message: "Service retrieved successfully",
-                data: service
-            });
-        } else {
-            res.status(404).json({
-                success: false,
-                message: "Service not found"
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error retrieving service",
-            error: error.message
-        });
-    }
-};
-
 serviceController.update = async (req, res) => {
     try {
         const serviceId = req.params.id;

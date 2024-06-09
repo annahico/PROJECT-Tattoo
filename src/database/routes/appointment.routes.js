@@ -6,7 +6,7 @@ const auth = require("../../middlewares/auth");
 
 // APPOINTMENT END POINT
 router.post("/", auth, ctrl.create);
-router.get("/", auth,ctrl.getAll);
+router.get("/", auth,ctrl.getMyAppointments);
 router.get("/:id",auth,  ctrl.getById);
 router.put("/:id", auth, ctrl.update);
 router.delete("/:id", auth, ctrl.delete);

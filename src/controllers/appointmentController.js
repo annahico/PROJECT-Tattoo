@@ -20,7 +20,7 @@ appointmentController.create = async (req, res) => {
     }
 };
 
-appointmentController.getAll = async (req, res) => {
+appointmentController.getMyAppointments = async (req, res) => {
     try {
         const appointments = await Appointment.findAll({
             attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
