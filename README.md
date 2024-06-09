@@ -1,4 +1,4 @@
-# REST API for Appointment Management in a Tattoo Studio
+# REST API: TATTOO STUDIO (backend project)
 <img src="https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171" width="1000" />
 
 ## Description
