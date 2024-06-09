@@ -15,7 +15,6 @@ module.exports = {
       },
       last_name: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
@@ -26,6 +25,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      // is_active: {
+      //   type: Sequelize.BOOLEAN,
+      //   allowNull: false
+      // },
       role_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

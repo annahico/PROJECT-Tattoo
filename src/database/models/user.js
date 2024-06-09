@@ -1,12 +1,16 @@
-const { Model } = require('sequelize');
-const sequelize = require('../../database/db');
-
+'use strict';
+const {  Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       User.belongsTo(models.Role, {
         as: 'role',
         foreignKey: "role_id",
+      });
+
+      User.hasMany(models.Appointment, {
+        as: "appointments",
+        foreignKey: "user_id",
       });
     }
   }
@@ -35,12 +39,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password_hash: {
-      type: DataTypes.STRING, // Asegúrate de incluir esta línea para la columna password_hash
+      type: DataTypes.STRING, // Ensure this line is included for the password_hash column
       allowNull: false,
       validate: {
         notEmpty: true,
       }
     },
+    // is_active: {
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: false,
+    //   defaultValue: true,
+    // },
     role_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

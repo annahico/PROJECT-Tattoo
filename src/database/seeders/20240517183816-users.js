@@ -14,6 +14,7 @@ module.exports = {
           last_name: 'The White',
           email: 'admin@example.es',
           password_hash: bcrypt.hashSync(plainPassword, 10),
+          is_active: true,
           role_id: 1,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -23,6 +24,7 @@ module.exports = {
           last_name: 'Elesar',
           email: 'aragorn@example.es',
           password_hash: bcrypt.hashSync(plainPassword, 10),
+          is_active: true,
           role_id: 2,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -32,6 +34,7 @@ module.exports = {
           last_name: 'Sindar',
           email: 'legolas@example.es',
           password_hash: bcrypt.hashSync(plainPassword, 10),
+          is_active: true,
           role_id: 3,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -41,6 +44,7 @@ module.exports = {
           last_name: 'son of Glöin',
           email: 'gimli@example.es',
           password_hash: bcrypt.hashSync(plainPassword, 10),
+          is_active: true,
           role_id: 3,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -50,6 +54,7 @@ module.exports = {
           last_name: 'Baggins',
           email: 'frodo@example.es',
           password_hash: bcrypt.hashSync(plainPassword, 10),
+          is_active: true,
           role_id: 4,
           createdAt: new Date(),
           updatedAt: new Date()
