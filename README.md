@@ -105,7 +105,7 @@ In order to use this project, follow the following steps:
     npm run dev
 ```
 - Now in Postman you can consult each of the endpoints.
-- 
+  
 ## 8. <a id="link">Link</a> :dart:
 
 https://github.com/annahico/PROJECT-Tattoo
