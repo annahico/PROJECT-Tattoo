@@ -1,61 +1,73 @@
 const { Appointment, Service } = require("../database/models");
-
 const appointmentController = {};
 
+const dateValidator = (date) => {
+    return !isNaN(Date.parse(date)
+    );
+};
+
+
 appointmentController.create = async (req, res) => {
+    const { appointment_date, service_id, tattoo_artist_id } = req.body;
+    const user_id = req.tokenData.userId;
+    
+
     try {
-        const { appointment_date, user_id, service_id } = req.body;
-        const newAppointment = await Appointment.create({ appointment_date, user_id, service_id });
+        if (!appointment_date || !user_id || !service_id || !tattoo_artist_id || !dateValidator(appointment_date)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid appointment date, user, service, or tattoo artist",
+            });
+        }
+
+        await Appointment.create({
+            appointment_date,
+            user_id,
+            service_id,
+            tattoo_artist_id
+        });
+
         res.status(200).json({
             success: true,
             message: "Appointment created successfully",
-            data: newAppointment
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error creating appointment",
-            error: error.message
+            message: "Error creating Appointment",
+            error: error.message,
         });
     }
 };
 
 appointmentController.getMyAppointments = async (req, res) => {
+    const user_id = req.tokenData.userId;
+
     try {
         const appointments = await Appointment.findAll({
-            attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
+            where: { user_id }
         });
         res.status(200).json({
             success: true,
-            message: "Appointments retrieved successfully",
             data: appointments
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error retrieving appointments",
+            message: "Error getting appointments",
             error: error.message
         });
     }
 };
 
 appointmentController.getById = async (req, res) => {
+    const appointmentId = req.params.id;
+
     try {
-        const appointmentId = req.params.id;
-        const appointment = await Appointment.findByPk(appointmentId, {
-            include: [
-                {
-                    model: Service,
-                    as: 'service',  // Alias corregido
-                    attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
-                },
-            ],
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-        });
+        const appointment = await Appointment.findByPk(appointmentId);
         if (appointment) {
             res.status(200).json({
                 success: true,
-                message: "Appointment retrieved successfully",
                 data: appointment
             });
         } else {
@@ -67,7 +79,7 @@ appointmentController.getById = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error retrieving appointment",
+            message: "Error getting appointment",
             error: error.message
         });
     }

@@ -1,13 +1,11 @@
 const { User, Role } = require("../database/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-// Definir el objeto userController
-const userController = {};
+const userController = {};// Definir el objeto userController
 
 userController.getUserProfile = async (req, res) => {
-    const userId = req.tokenData.userId;
-
+        const userId = req.tokenData.userId;
+    console.log("holi");
     try {
         const user = await User.findByPk(userId, {
             attributes: { exclude: ["createdAt", "updatedAt", "password", "role_id"] },
@@ -175,6 +173,7 @@ userController.update = async (req, res) => {
 };
 
 userController.delete = async (req, res) => {
+    console.log("hola");
     const userId = req.params.id;
 
     try {

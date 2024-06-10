@@ -27,7 +27,11 @@ module.exports = {
         references: {
           model: "Services",
           key: 'id'
-        }
+        },
+        tattoo_artist_id: {
+          allowNull: true,
+          type: Sequelize.INTEGER
+        },
       },
       createdAt: {
         allowNull: false,

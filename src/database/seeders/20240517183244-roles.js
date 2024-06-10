@@ -8,27 +8,19 @@ module.exports = {
       [
         {
           id: 1,
-          name: 'Super_Admin',
-          createdAt: new Date(),
-          updatedAt: new Date()
+          name: 'Super_Admin'
         },
         {
           id: 2,
           name: 'Manager',
-          createdAt: new Date(),
-          updatedAt: new Date()
         },
         {
           id: 3,
-          name: 'Staff',
-          createdAt: new Date(),
-          updatedAt: new Date()
+          name: 'Tattoo Artist',
         },
         {
           id: 4,
           name: 'Customer',
-          createdAt: new Date(),
-          updatedAt: new Date()
         },
       ],
       {}

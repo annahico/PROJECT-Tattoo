@@ -1,7 +1,6 @@
 const { User, Role } = require("../database/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const authController = {};
 
 authController.register = async (req, res) => {
