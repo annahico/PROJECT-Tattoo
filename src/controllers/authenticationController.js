@@ -1,16 +1,22 @@
-const { User, Role } = require("../database/models");
+const { User, Role } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authController = {};
 
+// Helper function to validate email
+const emailValidator = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
 authController.register = async (req, res) => {
     try {
-        const { first_name, last_name, email, password } = req.body;
+        const { first_name, email, password, ...userData } = req.body;
 
-        if (!first_name || !last_name || !email || !password) {
+        if (!first_name || !emailValidator(email) || !password) {
             return res.status(400).json({
                 success: false,
-                message: "All fields are required",
+                message: "All fields are required and email must be valid",
             });
         }
 
@@ -23,11 +29,11 @@ authController.register = async (req, res) => {
             });
         }
 
-        const hashedPassword = bcrypt.hashSync(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
+            ...userData,
             first_name,
-            last_name,
             email,
             password_hash: hashedPassword,
             role_id: 4, // user role
@@ -51,7 +57,6 @@ authController.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Validate email and password
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
@@ -76,7 +81,7 @@ authController.login = async (req, res) => {
             });
         }
 
-        const isPasswordValid = bcrypt.compareSync(password, user.password_hash);
+        const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
         if (!isPasswordValid) {
             return res.status(400).json({

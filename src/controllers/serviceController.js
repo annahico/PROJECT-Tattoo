@@ -1,95 +1,110 @@
-const { Service, Appointment } = require("../database/models");
+const { Service } = require("../models");
 
 const serviceController = {};
 
+// Create a new service
 serviceController.create = async (req, res) => {
+    const { service_name, description } = req.body;
+
+    if (!service_name || !description) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid service name or description",
+        });
+    }
+
     try {
-        const { service_name, description } = req.body;
-        const newService = await Service.create({ service_name, description });
-        res.status(200).json({
+        await Service.create({ service_name, description });
+        return res.status(200).json({
             success: true,
             message: "Service created successfully",
-            data: newService
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Error creating service",
-            error: error.message
+            error: error.message,
         });
     }
 };
 
+// Retrieve all services
 serviceController.getAll = async (req, res) => {
     try {
         const services = await Service.findAll({
             attributes: { exclude: ["createdAt", "updatedAt", "user_id"] },
-        }); // Corregido 'service' por 'services'
-        res.status(200).json({
+        });
+        return res.status(200).json({
             success: true,
             message: "Services retrieved successfully",
-            data: services  // Corregido 'service' por 'services'
+            data: services,
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Error retrieving services",
-            error: error.message
+            error: error.message,
         });
     }
 };
 
+// Update a service by ID
 serviceController.update = async (req, res) => {
+    const serviceId = req.params.id;
+    const serviceData = req.body;
+
     try {
-        const serviceId = req.params.id;
-        const serviceData = req.body;
         const [updated] = await Service.update(serviceData, {
-            where: { id: serviceId }
+            where: { id: serviceId },
         });
+
         if (updated) {
             const updatedService = await Service.findByPk(serviceId);
-            res.status(200).json({
+            return res.status(200).json({
                 success: true,
                 message: "Service updated successfully",
-                data: updatedService
+                data: updatedService,
             });
         } else {
-            res.status(404).json({
+            return res.status(404).json({
                 success: false,
-                message: "Service not found"
+                message: "Service not found",
             });
         }
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Error updating service",
-            error: error.message
+            error: error.message,
         });
     }
 };
 
+// Delete a service by ID
 serviceController.delete = async (req, res) => {
+    const serviceId = req.params.id;
+
     try {
-        const serviceId = req.params.id;
         const deleted = await Service.destroy({
-            where: { id: serviceId }
+            where: { id: serviceId },
         });
+
         if (deleted) {
-            res.status(200).json({
+            return res.status(200).json({
                 success: true,
-                message: "Service deleted successfully"
+                message: "Service deleted successfully",
             });
         } else {
-            res.status(404).json({
+            return res.status(404).json({
                 success: false,
-                message: "Service not found"
+                message: "Service not found",
             });
         }
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Error deleting service",
-            error: error.message
+            error: error.message,
         });
     }
 };
