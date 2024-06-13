@@ -2,16 +2,11 @@ const { Op } = require("sequelize");
 const { Appointment, Service, User } = require("../models");
 const appointmentController = {};
 
-// Helper function to validate date
-const dateValidator = (date) => {
-    return !isNaN(Date.parse(date));
-};
-
 appointmentController.create = async (req, res) => {
     const { appointment_date, service_id, tattoo_artist_id } = req.body;
     const user_id = req.tokenData.userId;
 
-    if (!appointment_date || !user_id || !service_id || !tattoo_artist_id || !dateValidator(appointment_date)) {
+    if (!appointment_date || !user_id || !service_id || !tattoo_artist_id) {
         return res.status(400).json({
             success: false,
             message: "Invalid appointment date, user, service, or tattoo artist",
