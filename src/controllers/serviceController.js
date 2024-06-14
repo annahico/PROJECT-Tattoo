@@ -48,6 +48,34 @@ serviceController.getAll = async (req, res) => {
     }
 };
 
+serviceController.getById = async (req, res) => {
+    const serviceId = req.params.id;
+
+    try {
+        const service = await Service.findByPk(serviceId, {
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+        });
+
+        if (!service) {
+            return res.status(404).json({
+                success: true,
+                message: "Service not found",
+            });
+            return;
+        }
+        res.status(200).json({
+            success: true,
+            data: service,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error retreived service",
+            error: error.message,
+        });
+    }
+};
+
 // Update a service by ID
 serviceController.update = async (req, res) => {
     const serviceId = req.params.id;
