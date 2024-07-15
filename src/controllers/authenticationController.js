@@ -11,9 +11,10 @@ const emailValidator = (email) => {
 
 authController.register = async (req, res) => {
     try {
-        const { first_name, email, password, ...userData } = req.body;
+        const { first_name, last_name, email, password, ...userData } = req.body;
 
-        if (!first_name || !emailValidator(email) || !password) {
+        if (!first_name || !last_name || !emailValidator(email) || !password) {
+            console.log(first_name, last_name, email, password);
             return res.status(400).json({
                 success: false,
                 message: "All fields are required and email must be valid",
@@ -34,6 +35,7 @@ authController.register = async (req, res) => {
         const user = await User.create({
             ...userData,
             first_name,
+            last_name,
             email,
             password_hash: hashedPassword,
             role_id: 4, // user role

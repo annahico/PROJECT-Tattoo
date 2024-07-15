@@ -2,12 +2,14 @@ const express = require("express");
 const dotenv = require("dotenv");
 const sequelize = require("./database/db");
 const apiRoutes = require("./routes");
+const cors = require("cors"); //para que funcione el frontend en REACT
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+app.use(cors()); //para que funcione el frontend en REACT
 
 const PORT = process.env.PORT || 4000;
 
