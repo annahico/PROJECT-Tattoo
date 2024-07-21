@@ -31,50 +31,48 @@ The project consists of developing a REST API for managing appointments in a tat
 - Service Management
 - Appointment Management
 
-<!-- ## 4. <a id="enpoints">Endpoints</a>
+## 4. <a id="enpoints">Endpoints</a>
 
 ### Authentication
 
-| Method | URI                           | Action                 |
-|--------|-------------------------------|------------------------|
-| POST   | `/api/auth/register`          | User Registration      |
-| POST   | `/api/auth/login`             | User login             |
+| Method | URI                  | Action            |
+| ------ | -------------------- | ----------------- |
+| POST   | `/api/auth/register` | User Registration |
+| POST   | `/api/auth/login`    | User login        |
 
 ### Users
 
-| Method | URI                                    | Action                       | Rol         |
-|--------|----------------------------------------|------------------------------|-------------|
-| GET    | `/api/users`                           | View all users               | Super Admin |
-| GET    | `/api/users/profile`                   | View user profile            |             |
-| PUT    | `/api/users/profile`                   | Modify profile information   |             |
-| GET    | `/api/users?email=example@example.com` | Filter user by email         | Super Admin |
-| DELETE | `/api/users/:id`                       | Delete user                  | Super Admin |
-| PUT    | `/api/users/:id/role`                  | Role change                  | Super Admin |
-| GET    | `/api/users/tattoo_artist`             | List all tattoo artists      | Super Admin |
-
+| Method | URI                                    | Action                     | Rol         |
+| ------ | -------------------------------------- | -------------------------- | ----------- |
+| GET    | `/api/users`                           | View all users             | Super Admin |
+| GET    | `/api/users/profile`                   | View user profile          |             |
+| PUT    | `/api/users/profile`                   | Modify profile information |             |
+| GET    | `/api/users?email=example@example.com` | Filter user by email       | Super Admin |
+| DELETE | `/api/users/:id`                       | Delete user                | Super Admin |
+| PUT    | `/api/users/:id/role`                  | Role change                | Super Admin |
+| GET    | `/api/users/tattoo_artist`             | List all tattoo artists    | Super Admin |
 
 ### Appointments
 
-| Method | URI                     | Action                   | Rol  |
-|--------|-------------------------|--------------------------|------|
-| POST   | `/api/appointments`     | Create appointment       |      |
-| PUT    | `/api/appointments`     | Update my appointment    |      |
-| GET    | `/api/appointments/:id` | Retrieve appointment     |      |
-| GET    | `/api/appointments`     | View my own appointments |      |
-
+| Method | URI                     | Action                   | Rol |
+| ------ | ----------------------- | ------------------------ | --- |
+| POST   | `/api/appointments`     | Create appointment       |     |
+| PUT    | `/api/appointments`     | Update my appointment    |     |
+| GET    | `/api/appointments/:id` | Retrieve appointment     |     |
+| GET    | `/api/appointments`     | View my own appointments |     |
 
 ### Services
 
 | Method | URI                 | Action                   | Rol         |
-|--------|---------------------|--------------------------|-------------|
+| ------ | ------------------- | ------------------------ | ----------- |
 | GET    | `/api/services`     | View my own appointments |             |
 | POST   | `/api/services`     | Create appointment       | Super Admin |
 | PUT    | `/api/services/:id` | Update my appointment    | Super Admin |
-| GET    | `/api/services/:id` | Retrieve appointment     | Super Admin | -->
+| GET    | `/api/services/:id` | Retrieve appointment     | Super Admin |
 
 ## 5. <a id="database">DataBase</a> :open_book:
 
-<img src="./img/database.png"  alt="DataBase"/>
+<!-- <img src="./img/database.png"  alt="DataBase"/> -->
 
 ## 6. <a id="installation">Installation </a>
 
