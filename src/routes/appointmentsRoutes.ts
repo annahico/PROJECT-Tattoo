@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { create, updateAppointmentById, deleteAppointmentByUserId } from "../controllers/appoimentsController";
+import { auth } from "../middlewares/auth";
+
+const router = Router()
+
+router.post('/create', auth, create)
+router.post('/update/:id', auth, updateAppointmentById)
+router.delete('/delete', auth, deleteAppointmentByUserId)
+
+export { router }
