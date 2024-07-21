@@ -119,7 +119,7 @@ In order to use this project, follow the following steps:
 
 ## 8. <a id="link">Link</a> :dart:
 
-https://github.com/annahico/PROJECT-Tattoo
+https://github.com/annahico/PROJECT-Tattoo-Backend
 
 ## 9. <a id="developer">Developer</a> :wave:
 
