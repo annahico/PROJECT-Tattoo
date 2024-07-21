@@ -7,6 +7,5 @@ const sampleMiddleware = (req: Request, res: Response, next: NextFunction) => {
   next();
 }
 
-export { sampleMiddleware }
+export { sampleMiddleware };
 
- 

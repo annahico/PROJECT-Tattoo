@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:5050/tattoo_artist/customers",
+			"name": "localhost:4000/tattoo_artist/customers",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -22,11 +22,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/customers",
+					"raw": "localhost:4000/tattoo_artist/customers",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"customers"
@@ -36,7 +36,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/register",
+			"name": "localhost:4000/tattoo_artist/register",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Gaston\",\r\n    \"surname\": \"Valentinni\",\r\n    \"email\": \"gaston@gmail.com\",\r\n    \"password\": \"Gaston!\"\r\n}\r\n\r\n",
+					"raw": "{\r\n    \"name\": \"Legolas\",\r\n    \"surname\": \"Elf\",\r\n    \"email\": \"legolas@email.com\",\r\n    \"password\": \"Legolas\"\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,11 +60,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/register",
+					"raw": "localhost:4000/tattoo_artist/register",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"register"
@@ -74,7 +74,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/update_admin",
+			"name": "localhost:4000/tattoo_artist/update_admin",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -98,11 +98,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/update_admin",
+					"raw": "localhost:4000/tattoo_artist/update_admin",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"update_admin"
@@ -112,7 +112,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/update_admin_customer",
+			"name": "localhost:4000/tattoo_artist/update_admin_customer",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -136,11 +136,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/update_admin_customer",
+					"raw": "localhost:4000/tattoo_artist/update_admin_customer",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"update_admin_customer"

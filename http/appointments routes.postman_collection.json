@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:5050/appoiments/create",
+			"name": "localhost:4000/appoiments/create",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -20,10 +20,15 @@
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"customer_id\": \"1\",\r\n    \"tattoo_artist_id\": \"1\",\r\n    \"date\": \"2023-12-30 14:01:04\"\r\n}",
+					"raw": "{\r\n    \"tattoo_artist_id\": \"1\",\r\n    \"date\": \"2023-12-30 14:01:04\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -31,11 +36,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/appoiments/create",
+					"raw": "http://localhost:4000/appoiments/create",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"appoiments",
 						"create"
@@ -45,7 +51,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/appoiments/update/1",
+			"name": "localhost:4000/appoiments/update/1",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -58,7 +64,12 @@
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"tattoo_artist_id\": 1,\r\n    \"status\": \"0\",\r\n    \"date\": \"2024-12-30 14:01:04\"\r\n}",
@@ -69,11 +80,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/appoiments/update/1",
+					"raw": "http://localhost:4000/appoiments/update/1",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"appoiments",
 						"update",
@@ -84,7 +96,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/appoiments/delete",
+			"name": "localhost:4000/appoiments/delete",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -97,7 +109,12 @@
 					]
 				},
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"id\": 3\r\n}",
@@ -108,11 +125,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/appoiments/delete",
+					"raw": "http://localhost:4000/appoiments/delete",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"appoiments",
 						"delete"

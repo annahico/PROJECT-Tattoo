@@ -7,16 +7,18 @@
 	},
 	"item": [
 		{
-			"name": "localhost:5050/customer/register",
+			"name": "localhost:4000/customer/register",
 			"request": {
-				"auth": {
-					"type": "bearer"
-				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Alex\",\r\n    \"surname\": \"Valdivielso\",\r\n    \"email\": \"alex@gmail.com\",\r\n    \"password\": \"Pas&asdf\"\r\n}\r\n\r\n",
+					"raw": "{\r\n    \"name\": \"Gandalf\",\r\n    \"surname\": \"the White\",\r\n    \"email\": \"gandalf@example.com\",\r\n    \"password\": \"Pas&asdf\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,11 +26,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/customer/register",
+					"raw": "http://localhost:4000/customer/register",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"customer",
 						"register"
@@ -38,13 +41,18 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/customer/login",
+			"name": "localhost:4000/customer/login",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"alex@gmail.com\",\r\n    \"password\": \"Pas&asdf\"\r\n}",
+					"raw": "{\r\n    \"email\": \"gandalf@example.com\",\r\n    \"password\": \"Pas&asdf\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,11 +60,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/customer/login",
+					"raw": "http://localhost:4000/customer/login",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"customer",
 						"login"
@@ -66,10 +75,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/customer/profile",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "localhost:4000/customer/profile",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -82,20 +88,19 @@
 					]
 				},
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "",
-						"variables": ""
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
 					}
-				},
+				],
 				"url": {
-					"raw": "localhost:5050/customer/profile",
+					"raw": "http://localhost:4000/customer/profile",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"customer",
 						"profile"
@@ -105,7 +110,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/customer/update",
+			"name": "localhost:4000/customer/update",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -118,10 +123,15 @@
 					]
 				},
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Alejandro\",\r\n    \"surname\": \"Valdi\",\r\n    \"email\": \"alejandro@gmail.com\",\r\n    \"password\": \"Pas&asdfs\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Gandalf\",\r\n    \"surname\": \"el Blanco\",\r\n    \"email\": \"gandalf@email.com\",\r\n    \"password\": \"Gandalf\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -129,11 +139,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/customer/update",
+					"raw": "http://localhost:4000/customer/update",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"customer",
 						"update"
@@ -143,7 +154,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/customer/appointment/1",
+			"name": "localhost:4000/customer/appointment/1",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -156,13 +167,19 @@
 					]
 				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"url": {
-					"raw": "localhost:5050/customer/appointment/1",
+					"raw": "http://localhost:4000/customer/appointment/1",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"customer",
 						"appointment",

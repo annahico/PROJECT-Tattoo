@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
 
 const auth = (req: any, res: Response, next: NextFunction) => {
@@ -33,4 +33,5 @@ const auth = (req: any, res: Response, next: NextFunction) => {
   }
 }
 
-export { auth }
+export { auth };
+

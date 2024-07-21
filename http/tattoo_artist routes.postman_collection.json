@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:5050/tattoo_artist/login",
+			"name": "localhost:4000/tattoo_artist/login",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"pablo@gmail.com\",\r\n    \"password\": \"Pablo_Prost\"\r\n}",
+					"raw": "{\r\n    \"email\": \"aragorn@email.com\",\r\n    \"password\": \"Aragorn_King\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -31,11 +31,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/login",
+					"raw": "localhost:4000/tattoo_artist/login",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"login"
@@ -45,7 +45,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/profile",
+			"name": "localhost:4000/tattoo_artist/profile",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -60,11 +60,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/profile",
+					"raw": "localhost:4000/tattoo_artist/profile",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"profile"
@@ -74,7 +74,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/update",
+			"name": "localhost:4000/tattoo_artist/update",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -90,7 +90,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Gaston\",\r\n    \"surname\": \"Valentinni\",\r\n    \"email\": \"gaston@gmail.com\",\r\n    \"password\": \"Gaston!\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Legolas\",\r\n    \"surname\": \"Elf\",\r\n    \"email\": \"legolas@email.com\",\r\n    \"password\": \"Legolas\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,11 +98,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/update",
+					"raw": "localhost:4000/tattoo_artist/update",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"update"
@@ -112,7 +112,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/appointment/1",
+			"name": "localhost:4000/tattoo_artist/appointment/1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -139,11 +139,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/appointment/1",
+					"raw": "localhost:4000/tattoo_artist/appointment/1",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"appointment",
@@ -154,7 +154,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:5050/tattoo_artist/all",
+			"name": "localhost:4000/tattoo_artist/all",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -169,11 +169,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5050/tattoo_artist/all",
+					"raw": "localhost:4000/tattoo_artist/all",
 					"host": [
 						"localhost"
 					],
-					"port": "5050",
+					"port": "4000",
 					"path": [
 						"tattoo_artist",
 						"all"
