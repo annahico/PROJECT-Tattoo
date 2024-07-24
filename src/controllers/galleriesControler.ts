@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Gallery } from "../models/Gallery";
 
 const createImage = async (req: Request, res:Response, next: NextFunction) => {
@@ -43,7 +43,7 @@ const updateImageById = async(req: any, res: Response) => {
       if (!gallery) {
         return res.status(404).json({
           success: true,
-          message: "gallery image doesnt found and cant updated",
+          message: "gallery image does not found and cannot updated",
         })
       }
   
@@ -64,7 +64,7 @@ const updateImageById = async(req: any, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "Image cant by updated",
+        message: "Image cannot by updated",
         error: error
       })
     }
@@ -88,7 +88,7 @@ const updateImageById = async(req: any, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "Image cant by deleted",
+        message: "Image cannot by deleted",
         error: error,
       });
     }
@@ -125,7 +125,7 @@ const updateImageById = async(req: any, res: Response) => {
       return res.json(
         {
           success: false,
-          message: "Gallery cant be retrieved",
+          message: "Gallery cannot be retrieved",
           error: error
         }
       )
@@ -133,4 +133,5 @@ const updateImageById = async(req: any, res: Response) => {
   }
 
 
-export { createImage, updateImageById, deleteImageByTattooArtistId, getAllGallery }
+export { createImage, deleteImageByTattooArtistId, getAllGallery, updateImageById };
+

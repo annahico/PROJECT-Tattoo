@@ -1,9 +1,8 @@
-import { Response, Request } from "express";
-import jwt from "jsonwebtoken";
-import { Customer } from "../models/Customer";
 import bcrypt from "bcrypt";
-import { TokenDecoded } from "../../types";
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { Appointment } from "../models/Appointment";
+import { Customer } from "../models/Customer";
 
 const register = async (req: Request, res: Response) => {
     try{
@@ -41,7 +40,7 @@ const register = async (req: Request, res: Response) => {
         return res.status(500).json(
             {
                 success: false,
-                message: "Customer account cant be created",
+                message: "Customer account cannot be created",
                 error: error
             }
         )
@@ -94,7 +93,7 @@ const login = async (req: Request, res: Response) => {
         return res.status(500).json(
           {
             success: false,
-            message: "users cant be logged",
+            message: "users cannot be logged",
             error: error
           }
         )
@@ -120,7 +119,7 @@ const profile = async (req: Request, res: Response) => {
         return res.json(
           {
             success: false,
-            message: "User profile cant be retrieved",
+            message: "User profile cannot be retrieved",
             error: error
           }
         )
@@ -165,7 +164,7 @@ const update = async (req: Request, res: Response) => {
   } catch (error) {
     return res.json({
       success: false,
-      message: "User information cant by updated",
+      message: "User information cannot by updated",
       error: error
     })
   }
@@ -204,10 +203,11 @@ const getAllAppointmentByCustomerId = async(req: Request, res: Response) => {
   } catch (error) {
     return res.json({
       success: false,
-      message: "appointments cant by user retrieved",
+      message: "appointments cannot by user retrieved",
       error: error
     })
   }
 }
 
-export { register, login, profile, update, getAllAppointmentByCustomerId }
+export { getAllAppointmentByCustomerId, login, profile, register, update };
+

@@ -1,10 +1,9 @@
-import { Response, Request, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import { Tattoo_artist } from "../models/Tattoo_artist";
 import bcrypt from "bcrypt";
-import { TokenDecoded } from "../../types";
+import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { Appointment } from "../models/Appointment";
 import { Customer } from "../models/Customer";
+import { Tattoo_artist } from "../models/Tattoo_artist";
 
 const register = async (req: Request, res:Response, next: NextFunction) => {
     try{
@@ -163,7 +162,7 @@ const update = async (req: Request, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "User information cant by updated",
+        message: "User information cannot by updated",
         error: error
       })
     }
@@ -203,7 +202,7 @@ const update = async (req: Request, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "appointments cant by tattoo artist retrieved",
+        message: "appointments cannot by tattoo artist retrieved",
         error: error
       })
     }
@@ -233,7 +232,7 @@ const update = async (req: Request, res: Response) => {
       return res.json(
         {
           success: false,
-          message: "users cant be retrieved",
+          message: "users cannot be retrieved",
           error: error
         }
       )
@@ -270,7 +269,7 @@ const update = async (req: Request, res: Response) => {
       return res.json(
         {
           success: false,
-          message: "users cant be retrieved",
+          message: "users cannot be retrieved",
           error: error
         }
       )
@@ -300,7 +299,7 @@ const update = async (req: Request, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "User information cant by updated",
+        message: "User information cannot by updated",
         error: error
       })
     }
@@ -328,7 +327,7 @@ const update = async (req: Request, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "User information cant by updated",
+        message: "User information cannot by updated",
         error: error
       })
     }
@@ -371,10 +370,11 @@ const update = async (req: Request, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "appointments cant by tattoo artist retrieved",
+        message: "appointments cannot by tattoo artist retrieved",
         error: error
       })
     }
   }
 
-export { register, login, profile, update, getAllAppointmentByTattooArtistId, getAllTattooArtist, getAllCustomers, updateAdmin, updateAdminCustomers, getAllAppointment }
+export { getAllAppointment, getAllAppointmentByTattooArtistId, getAllCustomers, getAllTattooArtist, login, profile, register, update, updateAdmin, updateAdminCustomers };
+

@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Appointment } from "../models/Appointment";
 
 const create = async (req: Request, res:Response, next: NextFunction) => {
@@ -22,7 +22,7 @@ const create = async (req: Request, res:Response, next: NextFunction) => {
         return res.status(500).json(
             {
                 success: false,
-                message: "Appoiment cant be created",
+                message: "Appoiment cannot be created",
                 error: error
             }
         )
@@ -47,7 +47,7 @@ const updateAppointmentById = async(req: any, res: Response) => {
       if (!appointment) {
         return res.status(404).json({
           success: true,
-          message: "appointment by user doesnt found and cant updated",
+          message: "appointment by user does not found and cant updated",
         })
       }
   
@@ -70,7 +70,7 @@ const updateAppointmentById = async(req: any, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "Appointment cant by updated",
+        message: "Appointment cannot by updated",
         error: error
       })
     }
@@ -94,10 +94,11 @@ const updateAppointmentById = async(req: any, res: Response) => {
     } catch (error) {
       return res.json({
         success: false,
-        message: "Appointment cant by deleted",
+        message: "Appointment cannot by deleted",
         error: error,
       });
     }
   };
 
-export { create, updateAppointmentById, deleteAppointmentByUserId }
+export { create, deleteAppointmentByUserId, updateAppointmentById };
+
