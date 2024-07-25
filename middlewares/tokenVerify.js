@@ -1,14 +1,12 @@
-
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
-
- try {
+  try {
     const bearerToken = req.headers.authorization;
     if (!bearerToken) {
-      return res.status(501).json({
-        success: true,
-        message: "No tienes permiso para continuar",
+      return res.status(403).json({
+        success: false,
+        message: "You do not have permission to continue",
       });
     }
 
@@ -21,9 +19,9 @@ const auth = (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.json({
+    return res.status(401).json({
       success: false,
-      message: "Token invalido",
+      message: "Invalid token",
       error: error.message,
     });
   }
