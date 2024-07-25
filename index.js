@@ -1,32 +1,36 @@
-
 const express = require("express");
-
-const app = express();
-
-const PORT = 5000;
-
 const cors = require("cors");
 const router = require("./router.js");
 
-//Opciones Cors
-let corsOptions = {
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Opciones CORS
+const corsOptions = {
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    // methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
-    // allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization",
     optionsSuccessStatus: 204
 };
 
-//Esto se hace para poder trabajar con un body en formato JSON en nuestras llamadas
+// Middleware para parsear JSON
 app.use(express.json());
 
-//Después de express.json...
-
+// Aplicar CORS
 app.use(cors(corsOptions));
 
-app.use(router);
+// Usar el router
+app.use("/api", router);
 
+// Ruta de salud
+app.get("/api/healthy", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "My APP server is healthy",
+    });
+});
+
+// Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor levantado y a la escucha en el puerto ${PORT}`);
+    console.log(`🚀 Server listening on port: ${PORT}`);
 });
