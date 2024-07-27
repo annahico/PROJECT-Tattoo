@@ -7,20 +7,20 @@ module.exports = {
       {
         id: 1,
         name: "Administrator",
-        createdAt: "2023-09-02 00:29:32",
-        updatedAt: "2023-09-02 00:29:32",
+        createdAt: "2024-07-26 00:29:32",
+        updatedAt: "2024-07-26 00:29:32",
       },
       {
         id: 2,
         name: "Customer",
-        createdAt: "2023-09-02 00:29:32",
-        updatedAt: "2023-09-02 00:29:32",
+        createdAt: "2024-07-26 00:29:32",
+        updatedAt: "2024-07-26 00:29:32",
       },
       {
         id: 3,
         name: "Artist",
-        createdAt: "2023-09-02 00:29:32",
-        updatedAt: "2023-09-02 00:29:32",
+        createdAt: "2024-07-26 00:29:32",
+        updatedAt: "2024-07-26 00:29:32",
       },
     ]);
   },
