@@ -1,6 +1,7 @@
 const { Design, Artist, Sequelize } = require('../models');
 const designsController = {};
 
+// Get all designs
 designsController.getAllDesigns = async (req, res) => {
   try {
     const allDesigns = await Design.findAll({
@@ -21,6 +22,7 @@ designsController.getAllDesigns = async (req, res) => {
       data: allDesigns,
     });
   } catch (error) {
+    console.error("Error retrieving all designs:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to retrieve tattoo designs",
@@ -29,6 +31,7 @@ designsController.getAllDesigns = async (req, res) => {
   }
 };
 
+// Search for a design by style
 designsController.searchADesign = async (req, res) => {
   const Op = Sequelize.Op;
 
@@ -47,29 +50,48 @@ designsController.searchADesign = async (req, res) => {
       ],
     });
 
+    if (designs.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No designs found for the given criteria",
+      });
+    }
+
     return res.json({
       success: true,
       data: designs,
     });
   } catch (error) {
+    console.error("Error searching for design:", error);
     return res.status(500).json({
       success: false,
-      message: "Tattoo design not found",
+      message: "Unable to search for design",
       error: error.message,
     });
   }
 };
 
+// Create a new design
 designsController.createNewDesign = async (req, res) => {
-  try {
-    const newDesign = await Design.create({
-      artist_id: req.body.artist_id,
-      style: req.body.style,
-      picture: req.body.picture,
-    });
+  const { artist_id, style, picture } = req.body;
 
-    return res.send(newDesign);
+  // Basic validation
+  if (!artist_id || !style || !picture) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing required fields",
+    });
+  }
+
+  try {
+    const newDesign = await Design.create({ artist_id, style, picture });
+    return res.status(201).json({
+      success: true,
+      message: "Design created successfully",
+      data: newDesign,
+    });
   } catch (error) {
+    console.error("Error creating new design:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to create the design",
@@ -78,29 +100,37 @@ designsController.createNewDesign = async (req, res) => {
   }
 };
 
+// Update an existing design
 designsController.modifyDesign = async (req, res) => {
-  let body = req.body;
+  const { id, artist_id, style, picture } = req.body;
+
+  // Basic validation
+  if (!id || !artist_id || !style || !picture) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing required fields",
+    });
+  }
 
   try {
-    const updateDesign = await Design.update(
-      {
-        artist_id: req.body.artist_id,
-        style: req.body.style,
-        picture: req.body.picture,
-      },
-      {
-        where: {
-          id: body.id,
-        },
-      }
+    const [updated] = await Design.update(
+      { artist_id, style, picture },
+      { where: { id } }
     );
+
+    if (updated === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Design not found",
+      });
+    }
 
     return res.json({
       success: true,
       message: "Design updated successfully",
-      data: updateDesign,
     });
   } catch (error) {
+    console.error("Error updating design:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to update the design",
@@ -109,21 +139,26 @@ designsController.modifyDesign = async (req, res) => {
   }
 };
 
+// Delete a design
 designsController.deleteDesign = async (req, res) => {
-  let tattooId = req.params.erase;
+  const tattooId = req.params.erase;
 
   try {
-    const deleteDesign = await Design.destroy({
-      where: {
-        id: tattooId,
-      },
-    });
+    const deleted = await Design.destroy({ where: { id: tattooId } });
+
+    if (deleted === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Design not found",
+      });
+    }
+
     return res.json({
       success: true,
       message: "Design deleted successfully",
-      data: deleteDesign,
     });
   } catch (error) {
+    console.error("Error deleting design:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to delete the design",

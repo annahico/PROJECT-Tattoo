@@ -9,19 +9,11 @@ appointmentsController.getAllAppointments = async (req, res) => {
       include: [
         {
           model: Artist,
-          required: false,
-          attributes: {
-            exclude: ['id', 'user_id', 'portfolio', 'updatedAt', 'createdAt'],
-            include: ['name']
-          }
+          attributes: { exclude: ['id', 'user_id', 'portfolio', 'updatedAt', 'createdAt'] },
         },
         {
           model: User,
-          required: false,
-          attributes: {
-            exclude: ['id', 'password', 'role_id', 'updatedAt', 'createdAt'],
-            include: ['name', 'surnames', 'phone', 'email']
-          }
+          attributes: { exclude: ['id', 'password', 'role_id', 'updatedAt', 'createdAt'] },
         }
       ]
     });
@@ -48,19 +40,11 @@ appointmentsController.getCustomerAppointments = async (req, res) => {
       include: [
         {
           model: Artist,
-          required: false,
-          attributes: {
-            exclude: ['id', 'user_id', 'portfolio', 'updatedAt', 'createdAt'],
-            include: ['name']
-          }
+          attributes: { exclude: ['id', 'user_id', 'portfolio', 'updatedAt', 'createdAt'] },
         },
         {
           model: User,
-          required: false,
-          attributes: {
-            exclude: ['id', 'password', 'role_id', 'updatedAt', 'createdAt'],
-            include: ['name', 'surnames', 'phone', 'email']
-          }
+          attributes: { exclude: ['id', 'password', 'role_id', 'updatedAt', 'createdAt'] },
         }
       ]
     });
@@ -87,19 +71,11 @@ appointmentsController.getArtistAppointments = async (req, res) => {
       include: [
         {
           model: Artist,
-          required: false,
-          attributes: {
-            exclude: ['id', 'user_id', 'portfolio', 'updatedAt', 'createdAt'],
-            include: ['name']
-          }
+          attributes: { exclude: ['id', 'user_id', 'portfolio', 'updatedAt', 'createdAt'] },
         },
         {
           model: User,
-          required: false,
-          attributes: {
-            exclude: ['id', 'password', 'role_id', 'updatedAt', 'createdAt'],
-            include: ['name', 'surnames', 'phone', 'email']
-          }
+          attributes: { exclude: ['id', 'password', 'role_id', 'updatedAt', 'createdAt'] },
         }
       ]
     });
@@ -121,14 +97,16 @@ appointmentsController.getArtistAppointments = async (req, res) => {
 // Create a new appointment
 appointmentsController.createNewAppointment = async (req, res) => {
   try {
+    const { user_id, artist_id, date, hour } = req.body;
+
     const newAppointment = await Appointment.create({
-      user_id: req.body.user_id,
-      artist_id: req.body.artist_id,
-      date: req.body.date,
-      hour: req.body.hour,
+      user_id,
+      artist_id,
+      date,
+      hour,
     });
 
-    return res.json({
+    return res.status(201).json({
       success: true,
       message: "Appointment created successfully",
       data: newAppointment,
@@ -144,27 +122,26 @@ appointmentsController.createNewAppointment = async (req, res) => {
 
 // Update an existing appointment
 appointmentsController.modifyAppointment = async (req, res) => {
-  let body = req.body;
+  const { id, user_id, artist_id, date, hour } = req.body;
 
   try {
-    const updateAppointment = await Appointment.update(
-      {
-        user_id: req.body.user_id,
-        artist_id: req.body.artist_id,
-        date: req.body.date,
-        hour: req.body.hour,
-      },
-      {
-        where: {
-          id: body.id
-        }
-      }
+    const [updated] = await Appointment.update(
+      { user_id, artist_id, date, hour },
+      { where: { id } }
     );
 
-    return res.json({
-      success: true,
-      message: "Appointment updated successfully",
-      data: updateAppointment,
+    if (updated) {
+      const updatedAppointment = await Appointment.findByPk(id);
+      return res.json({
+        success: true,
+        message: "Appointment updated successfully",
+        data: updatedAppointment,
+      });
+    }
+
+    return res.status(404).json({
+      success: false,
+      message: "Appointment not found",
     });
   } catch (error) {
     return res.status(500).json({
@@ -177,19 +154,23 @@ appointmentsController.modifyAppointment = async (req, res) => {
 
 // Delete an appointment
 appointmentsController.deleteAppointment = async (req, res) => {
-  let appointmentId = req.params.erase;
+  const { erase } = req.params;
 
   try {
-    const deleteAppointment = await Appointment.destroy({
-      where: {
-        id: appointmentId
-      },
+    const deleted = await Appointment.destroy({
+      where: { id: erase }
     });
 
-    return res.json({
-      success: true,
-      message: "Appointment successfully deleted",
-      data: deleteAppointment,
+    if (deleted) {
+      return res.json({
+        success: true,
+        message: "Appointment successfully deleted",
+      });
+    }
+
+    return res.status(404).json({
+      success: false,
+      message: "Appointment not found",
     });
   } catch (error) {
     return res.status(500).json({

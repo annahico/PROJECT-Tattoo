@@ -2,10 +2,10 @@
   "name": "project_backend",
   "version": "1.0.0",
   "description": "<img src=\"https://slm-assets.secondlife.com/assets/25494302/original/BareFlamboyantAngwantibo-size_restricted.gif?1579883171\" width=\"1000\"  alt=\"Tattoo Studio\"/>",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "dev": "nodemon index.js",
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,8 +17,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "9.0.2",
-    "mysql2": "^3.6.0",
-    "sequelize": "^6.32.1"
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

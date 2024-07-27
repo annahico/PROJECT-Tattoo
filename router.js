@@ -8,8 +8,6 @@ const paymentDatasRouter = require('./views/paymentDatasRouter.js');
 const designsRouter = require('./views/designsRouter.js');
 
 
-//Routing......
-
 router.use('/artists', artistsRouter);
 router.use('/appointments', appointmentsRouter);
 router.use('/users', usersRouter);

@@ -2,23 +2,28 @@ const { Design, Artist, Sequelize } = require('../models');
 
 const artistsController = {};
 
+// Search designs by artist user ID
 artistsController.searchArtistDesigns = async (req, res) => {
   const Op = Sequelize.Op;
+  const userId = req.params.userId;
 
   try {
     const artists = await Artist.findAll({
-      where: { user_id: { [Op.like]: `%${req.params.userId}%` } },
+      where: { user_id: userId }, // Asumiendo que user_id es un número
       include: [
         {
           model: Design,
-          required: false,
-          attributes: {
-            exclude: ['updatedAt', 'createdAt'],
-            include: ['id', 'style', 'picture', 'artist_id']
-          }
+          attributes: ['id', 'style', 'picture', 'artist_id'], // Ajustado para especificar campos
         }
       ]
     });
+
+    if (artists.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No designs found for this artist",
+      });
+    }
 
     return res.json({
       success: true,
@@ -27,12 +32,13 @@ artistsController.searchArtistDesigns = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "No designs were found",
+      message: "Unable to retrieve artist designs",
       error: error.message,
     });
   }
 };
 
+// Get all artists
 artistsController.getAllArtists = async (req, res) => {
   try {
     const allArtists = await Artist.findAll();
@@ -51,15 +57,18 @@ artistsController.getAllArtists = async (req, res) => {
   }
 };
 
+// Create a new artist
 artistsController.createNewArtist = async (req, res) => {
+  const { user_id, name, portfolio } = req.body;
+
   try {
     const newArtist = await Artist.create({
-      user_id: req.body.user_id,
-      name: req.body.name,
-      portfolio: req.body.portfolio
+      user_id,
+      name,
+      portfolio
     });
 
-    return res.json({
+    return res.status(201).json({
       success: true,
       message: "Artist created successfully",
       data: newArtist,
@@ -73,51 +82,57 @@ artistsController.createNewArtist = async (req, res) => {
   }
 };
 
+// Update an existing artist
 artistsController.modifyArtist = async (req, res) => {
-  let body = req.body;
+  const { id, user_id, name, portfolio } = req.body;
 
   try {
-    const updateArtist = await Artist.update(
-      {
-        user_id: req.body.user_id,
-        name: req.body.name,
-        portfolio: req.body.portfolio
-      },
-      {
-        where: {
-          id: body.id
-        }
-      }
+    const [updated] = await Artist.update(
+      { user_id, name, portfolio },
+      { where: { id } }
     );
 
-    return res.json({
-      success: true,
-      message: "Artist updated successfully",
-      data: updateArtist,
+    if (updated) {
+      const updatedArtist = await Artist.findByPk(id);
+      return res.json({
+        success: true,
+        message: "Artist updated successfully",
+        data: updatedArtist,
+      });
+    }
+
+    return res.status(404).json({
+      success: false,
+      message: "Artist not found",
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Unable to update artist data",
+      message: "Unable to update artist",
       error: error.message,
     });
   }
 };
 
+// Delete an artist
 artistsController.deleteArtist = async (req, res) => {
-  let body = req.body;
+  const { id } = req.params;
 
   try {
-    const deleteArtist = await Artist.destroy({
-      where: {
-        id: body.id
-      },
+    const deleted = await Artist.destroy({
+      where: { id }
     });
 
-    return res.json({
-      success: true,
-      message: "Artist successfully deleted",
-      data: deleteArtist,
+    if (deleted) {
+      return res.json({
+        success: true,
+        message: "Artist successfully deleted",
+      });
+    }
+
+    return res.status(404).json({
+      success: false,
+      message: "Artist not found",
     });
   } catch (error) {
     return res.status(500).json({

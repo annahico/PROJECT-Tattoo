@@ -2,6 +2,7 @@ const { Role } = require("../models");
 
 const rolesController = {};
 
+// Get all roles
 rolesController.getAllRoles = async (req, res) => {
   try {
     const allRoles = await Role.findAll();
@@ -12,6 +13,7 @@ rolesController.getAllRoles = async (req, res) => {
       data: allRoles,
     });
   } catch (error) {
+    console.error("Error retrieving roles:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to retrieve roles",
@@ -20,14 +22,28 @@ rolesController.getAllRoles = async (req, res) => {
   }
 };
 
+// Create a new role
 rolesController.createNewRole = async (req, res) => {
-  try {
-    const newRole = await Role.create({
-      name: req.body.name,
-    });
+  const { name } = req.body;
 
-    return res.send(newRole);
+  // Basic validation
+  if (!name) {
+    return res.status(400).json({
+      success: false,
+      message: "Role name is required",
+    });
+  }
+
+  try {
+    const newRole = await Role.create({ name });
+
+    return res.status(201).json({
+      success: true,
+      message: "Role created successfully",
+      data: newRole,
+    });
   } catch (error) {
+    console.error("Error creating role:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to create role",
@@ -36,50 +52,73 @@ rolesController.createNewRole = async (req, res) => {
   }
 };
 
+// Update an existing role
 rolesController.modifyRole = async (req, res) => {
-  let body = req.body;
+  const { id, name } = req.body;
+
+  // Basic validation
+  if (!id || !name) {
+    return res.status(400).json({
+      success: false,
+      message: "Role ID and name are required",
+    });
+  }
 
   try {
-    const updateRole = await Role.update(
-      {
-        name: req.body.name,
-      },
-      {
-        where: {
-          id: body.id,
-        },
-      }
+    const [updated] = await Role.update(
+      { name },
+      { where: { id } }
     );
+
+    if (updated === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Role not found",
+      });
+    }
 
     return res.json({
       success: true,
       message: "Role updated successfully",
-      data: updateRole,
     });
   } catch (error) {
+    console.error("Error updating role:", error);
     return res.status(500).json({
       success: false,
-      message: "Unable to update role data",
+      message: "Unable to update role",
       error: error.message,
     });
   }
 };
 
+// Delete a role
 rolesController.deleteRole = async (req, res) => {
-  let body = req.body;
+  const { id } = req.params;
+
+  // Basic validation
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      message: "Role ID is required",
+    });
+  }
 
   try {
-    const deleteRole = await Role.destroy({
-      where: {
-        id: body.id,
-      },
-    });
+    const deleted = await Role.destroy({ where: { id } });
+
+    if (deleted === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Role not found",
+      });
+    }
+
     return res.json({
       success: true,
       message: "Role deleted successfully",
-      data: deleteRole,
     });
   } catch (error) {
+    console.error("Error deleting role:", error);
     return res.status(500).json({
       success: false,
       message: "Unable to delete role",

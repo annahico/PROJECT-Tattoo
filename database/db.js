@@ -1,20 +1,23 @@
-const isArtist = (req, res, next) => {
-    try {
-        if (req.roleId !== 3) {
-            return res.status(403).json({
-                success: false,
-                message: "You do not have permission to perform this action",
-            });
+const path = require('path');
+const { Sequelize } = require("sequelize");
+const env = process.env.NODE_ENV || "development";
+const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
+require("dotenv").config();
+
+let sequelize;
+if (config.use_env_variable) {
+    sequelize = new Sequelize(process.env[config.use_env_variable], {
+        dialectOptions: {
+            timezone: 'local',
         }
+    });
+} else {
+    sequelize = new Sequelize(
+        config.database,
+        config.username,
+        config.password,
+        config
+    );
+}
 
-        next();
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "Unable to perform the action",
-            error: error.message,
-        });
-    }
-};
-
-module.exports = isArtist;
+module.exports = sequelize;

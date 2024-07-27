@@ -1,36 +1,43 @@
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require('dotenv').config(); // Para usar variables de entorno
 
 const authController = {};
 
 authController.login = async (req, res) => {
-  try {
-    // Collect email and password
-    const email = req.body.email;
-    const password = req.body.password;
+  const { email, password } = req.body;
 
-    const user = await User.findOne({
-      where: {
-        email: email,
-      },
-    });
+  try {
+    // Validar entrada
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
+      });
+    }
+
+    // Buscar usuario por email
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid username or email",
+        message: "Invalid credentials",
       });
     }
 
-    const isMatch = bcrypt.compareSync(password, user.password);
+    // Comparar contraseñas
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid password or username",
+        message: "Invalid credentials",
       });
     }
+
+    // Crear token
     const token = jwt.sign(
       {
         userId: user.id,
@@ -38,20 +45,21 @@ authController.login = async (req, res) => {
         roleId: user.role_id,
         userSurnames: user.surnames,
         userPhone: user.phone,
-        userEmail: user.email
+        userEmail: user.email,
       },
-      "secret_key",
+      process.env.JWT_SECRET, // Usar variable de entorno
       {
-        expiresIn: "4h",
+        expiresIn: "3h",
       }
     );
 
     return res.json({
       success: true,
       message: "User logged in successfully",
-      token: token,
+      token,
     });
   } catch (error) {
+    console.error("Login error:", error); // Log para depuración
     return res.status(500).json({
       success: false,
       message: "Unable to log in the user",
