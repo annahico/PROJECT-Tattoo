@@ -1,8 +1,23 @@
 'use strict';
 
+const bcrypt = require('bcrypt');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    const saltRounds = 10;
+    const passwords = [
+      "password1",
+      "password2",
+      "password3",
+      "password4",
+      "password5",
+      "password6",
+      "password7",
+    ];
+
+    const hashedPasswords = await Promise.all(passwords.map(password => bcrypt.hash(password, saltRounds)));
+
     await queryInterface.bulkInsert("Users", [
       {
         id: 1,
@@ -11,8 +26,8 @@ module.exports = {
         surnames: "Blake",
         email: "john@example.com",
         phone: 611111111,
-        password: "$2b$08$Hh/WjgkD9GgI.LL48ewUNeQhuU3U4xOjomP8Ahtq9qR0hKzEd/5Dq",
-        createdAt: "2024-07-26 00:29:322",
+        password: hashedPasswords[0],
+        createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
       {
@@ -22,7 +37,7 @@ module.exports = {
         surnames: "Bennet",
         email: "bennet@example.com",
         phone: 622222222,
-        password: "$2b$08$Hh/WjgkD9GgI.LL48ewUNeQhuU3U4xOjomP8Ahtq9qR0hKzEd/5Dq",
+        password: hashedPasswords[1],
         createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
@@ -33,7 +48,7 @@ module.exports = {
         surnames: "Spencer",
         email: "nora@example.com",
         phone: 633333333,
-        password: "$2b$08$Hh/WjgkD9GgI.LL48ewUNeQhuU3U4xOjomP8Ahtq9qR0hKzEd/5Dq",
+        password: hashedPasswords[2],
         createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
@@ -44,7 +59,7 @@ module.exports = {
         surnames: "Smith",
         email: "simon@example.com",
         phone: 644444444,
-        password: "$2b$08$Hh/WjgkD9GgI.LL48ewUNeQhuU3U4xOjomP8Ahtq9qR0hKzEd/5Dq",
+        password: hashedPasswords[3],
         createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
@@ -55,18 +70,18 @@ module.exports = {
         surnames: "Clare",
         email: "miranda@example.com",
         phone: 655555555,
-        password: "$2b$08$6gegCSFogFu8kL8WhbN1N.MiRsC6bU3i.HAtvQvwQWbrAyu84vUEC",
+        password: hashedPasswords[4],
         createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
       {
         id: 6,
         role_id: 3,
-        name: "Caharles",
+        name: "Charles",
         surnames: "White",
         email: "charles@example.com",
         phone: 666666666,
-        password: "$2a$12$MSAOOXLVW5HV2pJ4mLeXO.CMXjdCMPd2Omwf/uATW9rOJc0GXXSJi",
+        password: hashedPasswords[5],
         createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
@@ -77,7 +92,7 @@ module.exports = {
         surnames: "Eames",
         email: "sarah@example.com",
         phone: 777777777,
-        password: "$2a$12$MSAOOXLVW5HV2pJ4mLeXO.CMXjdCMPd2Omwf/uATW9rOJc0GXXSJi",
+        password: hashedPasswords[6],
         createdAt: "2024-07-26 00:29:32",
         updatedAt: "2024-07-26 00:29:32",
       },
@@ -85,5 +100,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };
